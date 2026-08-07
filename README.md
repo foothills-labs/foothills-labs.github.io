@@ -30,9 +30,9 @@ are in before reading a word:
 
 | Scheme | Where |
 | --- | --- |
-| **Glacier** (dark) / **Atlas** (light) | Default — the hero, the plan, the roadmap, principles. Warm typeset: Fraunces + Newsreader. |
-| **Field** (light) | The band holding `#models` and `#code` — the technical half. Typeset: Archivo. |
-| **Signal** (dark) | Reserved for benchmark and leaderboard pages. |
+| **Glacier** (dark) / **Atlas** (light) | Default — the hero, mission, models, principles, contact, and `/models/`. Warm typeset: Fraunces + Newsreader. |
+| **Field** (light) | The band holding `#tools`, and `/tools/`. Typeset: Archivo. |
+| **Signal** (dark) | `/benchmarks/`. Typeset: Archivo. |
 
 Apply with `data-scheme` on any element. Schemes nest and paint their own
 ground, so a results table can sit inside a lab page in its own scheme.
@@ -45,16 +45,18 @@ above it.
 
 ### Seams
 
-Where two schemes meet, the ground changes colour **along a contour line**, and
-the lines carry on across the join — a change of terrain, drawn rather than cut.
-`.seam-wrap` paints the outgoing ground, `.seam-ground` fills the incoming one,
-and the two line groups are inked for whichever ground they land on, so no line
-is ever drawn on its own colour. `.seam--up` is the same drawing flipped for the
-way back out.
+Where two schemes meet, the incoming scheme's ground **rises as a mountain
+range** into the outgoing scheme's sky: line-hatched ridge profiles, each peak
+filled with the incoming ground so nearer peaks occlude the ones behind, with
+nested slope lines converging toward each apex. Entering the band
+(`.seam-down`), the tools' paper ground rises into the lab's sky inked in
+moss; leaving it (`.seam-up`), the lab's own ground rises back inked in its
+accent — so no line ever sits on its own colour, and the drawn crest keeps the
+boundary legible where the two grounds are close (Atlas vellum against Field
+paper).
 
-This matters most in light mode, where Atlas vellum and Field paper are close
-enough that a hard edge would barely register: the drawn boundary is what makes
-the transition legible without forcing the two grounds further apart.
+The viewBox of every generated band is **fitted to the drawing** by the
+generator, so no line is clipped mid-stroke at the edge of the SVG.
 
 ### Case
 
@@ -107,17 +109,23 @@ and the scheme custom properties.
 
 ### Model glyphs
 
-`assets/brand/marks/` holds the eight contour glyphs, vendored from
-`foundation_lab/assets/marks/`. They are applied as CSS masks so they take the
-scheme's accent colour:
+`assets/brand/marks/` holds the eight contour glyphs (full and `-small` cuts),
+generated with `foundation_lab/assets/marks/generate.py` and vendored here.
+They are applied as CSS masks so they take the scheme's accent colour:
 
 ```html
-<span class="glyph" style="--g: url(/assets/brand/marks/contour-everest-small.svg)"></span>
+<span class="peak" style="--g: url(/assets/brand/marks/contour-everest.svg); ..."></span>
 ```
 
 The path **must be root-relative**. A `url()` inside a custom property resolves
 against the stylesheet that consumes it, not the document, so a relative path
 here resolves against `assets/` and 404s.
+
+> **Note:** the full glyphs follow the brand's 1,500 m contour interval, but
+> the **reduced cuts here carry the outermost *two* rings** instead of one —
+> one ring alone read too alike across the family. `foundation_lab`'s
+> generator still emits single-ring reduced cuts (`rings[:1]` in
+> `generate.py`); the two-ring change needs to land there or the repos drift.
 
 ## How this repo gets online
 
@@ -154,12 +162,15 @@ second path also requires switching **Settings → Pages → Source** to
 
 ```
 index.html        Landing page
+models/           /models/ — base camp page for the model range
+tools/            /tools/ — base camp page for the shipped tools (Field)
+benchmarks/       /benchmarks/ — base camp page, empty results table (Signal)
 404.html          Custom not-found page (Pages serves this automatically)
 assets/
   style.css       All styling; light and dark via prefers-color-scheme
   favicon.svg     Site icon
 robots.txt        Crawler policy, points at the sitemap
-sitemap.xml       Single-URL sitemap
+sitemap.xml       Sitemap: the landing page plus the three section pages
 .nojekyll         Publish files as-is, skip the Jekyll build
 ```
 
