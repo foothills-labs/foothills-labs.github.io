@@ -14,10 +14,13 @@ The visual system is defined in
 | Reasoning | [`docs/brand-rationale.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand-rationale.md) |
 | Logo files | [`assets/logo/`](https://github.com/foothills-labs/foundation_lab/tree/main/assets/logo) |
 
-**`assets/tokens.css` is a copy, not a source.** It comes from
-`assets/tokens/tokens.css` in `foundation_lab`. To change a colour or a
-typeface, change it there and copy the file across — that is what stops the site
-and the brand guide drifting apart. `assets/style.css` holds only site-specific
+**`assets/tokens.css` and `assets/tokens.json` are copies, not sources.** They
+come from `assets/tokens/` in `foundation_lab`. To change a colour or a
+typeface, change it there, regenerate the JSON with `build.py`, and copy both
+files across — that is what stops the site and the brand guide drifting apart.
+The JSON carries the generated contrast matrix and fill guards, so the
+"generated rather than asserted" claim in the CSS header holds next to the copy
+too. `assets/style.css` holds only site-specific
 layout and components, and reads everything else from tokens.
 
 ### Schemes on this site
