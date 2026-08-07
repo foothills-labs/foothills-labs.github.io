@@ -3,6 +3,51 @@
 The Foothills Labs website — a hand-written static site, served by GitHub Pages
 at <https://foothills-labs.github.io/>.
 
+## Brand
+
+The visual system is defined in
+[`foundation_lab`](https://github.com/foothills-labs/foundation_lab), not here:
+
+| | |
+| --- | --- |
+| Rules | [`docs/brand.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand.md) |
+| Reasoning | [`docs/brand-rationale.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand-rationale.md) |
+| Logo files | [`assets/logo/`](https://github.com/foothills-labs/foundation_lab/tree/main/assets/logo) |
+
+**`assets/tokens.css` is a copy, not a source.** It comes from
+`assets/tokens/tokens.css` in `foundation_lab`. To change a colour or a
+typeface, change it there and copy the file across — that is what stops the site
+and the brand guide drifting apart. `assets/style.css` holds only site-specific
+layout and components, and reads everything else from tokens.
+
+### Schemes on this site
+
+Four schemes, paired by area of the lab, so a reader can tell which half they
+are in before reading a word:
+
+| Scheme | Where |
+| --- | --- |
+| **Glacier** (dark) / **Atlas** (light) | Default — the lab, the hero, About. Warm typeset: Fraunces + Newsreader. |
+| **Field** (light) | `#projects` — tooling. Technical typeset: Archivo. |
+| **Signal** (dark) | Reserved for benchmark and leaderboard pages. |
+
+Apply with `data-scheme` on any element. Schemes nest and paint their own
+ground, so a results table can sit inside a lab page in its own scheme.
+
+### Fonts
+
+Self-hosted in `assets/fonts/`, no external requests. Fraunces and Newsreader
+are preloaded because they render the hero; Archivo and JetBrains Mono load
+normally. All four are open licence — Fraunces, Newsreader and Archivo are SIL
+OFL 1.1, JetBrains Mono is Apache-2.0.
+
+### Illustration
+
+Abstract mountaineering: line not fill, plan and section rather than scenery.
+The hero band is a contour section, drawn in the same language as the mark.
+**No horizons, no summits at sunset** — a literal ridge silhouette is the one
+thing the identity rules out, because it undoes the argument the mark makes.
+
 ## How this repo gets online
 
 This repo is an **organization Pages site**, which is a special case in GitHub
