@@ -1,0 +1,215 @@
+/* Foothills Labs — design tokens
+ *
+ * Generated companion: tokens.json. Rules and reasoning live in
+ * docs/brand.md. Change them there first, then here, then regenerate the JSON
+ * with `python3 build.py`.
+ *
+ * Two decisions shape this file.
+ *
+ * 1. FOUR SCHEMES, PAIRED BY AREA. Glacier/Atlas carry the lab and the models;
+ *    Signal/Field carry benchmarks and tools. A reader can tell which half of
+ *    the lab they are in before reading a word.
+ *
+ * 2. TWO TYPE SYSTEMS. Warm serif for the lab and the models, grotesque and
+ *    mono for benchmarks and tools. JetBrains Mono is shared by both, which is
+ *    what keeps them one brand rather than two.
+ *
+ * Apply a scheme with data-scheme on any element; nest freely.
+ *   <html data-scheme="glacier">     lab, models        (dark)
+ *   <html data-scheme="atlas">       lab, models        (light)
+ *   <html data-scheme="signal">      benchmarks, tools  (dark)
+ *   <html data-scheme="field">       benchmarks, tools  (light)
+ */
+
+:root {
+  /* --- palette ---------------------------------------------------------- */
+
+  /* Lichen. The one hot colour, and a fill rather than an ink: it holds dark
+   * text on a light ground but must never set text itself — 1.4:1 on paper.
+   * Print: closest Pantone Solid Coated is 584 C (dE2000 2.7); 382 C is the
+   * runner-up at 3.5. Confirm against a physical chip before any print run. */
+  --fh-lichen: #c2dc2f;
+  --fh-signal: var(--fh-lichen);   /* legacy alias */
+
+  /* Text placed ON a lichen fill. Constant across schemes, because lichen is
+   * always the light half of the pair. This token is what makes "signal is a
+   * fill, not an ink" mechanical rather than a thing to remember. */
+  --fh-on-lichen: #0c1110;
+
+  --fh-ink: #0c1110;         /* near-black, green cast */
+  --fh-basalt: #171e1a;      /* raised surface on ink */
+  --fh-moss: #39441f;        /* deep olive */
+  --fh-alpine: #12688f;      /* glacier-lake blue */
+  --fh-scree: #8c9689;       /* grey with a green bias */
+  --fh-glacier: #9cc7d8;     /* pale cyan */
+  --fh-paper: #f2f3ec;       /* warm off-white */
+  --fh-white: #ffffff;
+
+  /* Atlas extends the palette with Imhof's aerial-perspective colours. */
+  --fh-shadow: #414a6b;      /* shadow violet */
+  --fh-bistre: #7c6a52;      /* rock brown */
+  --fh-ochre: #ce9b45;       /* warm light */
+  --fh-vellum: #ede6d6;      /* warm paper */
+
+  /* --- type ------------------------------------------------------------- */
+
+  /* Warm system — the lab and the models. Fraunces is built on deliberate
+   * irregularity, which is the same argument the logo makes. */
+  --fh-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --fh-font-body: "Newsreader", Georgia, "Times New Roman", serif;
+
+  /* Technical system — benchmarks and tools. */
+  --fh-font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  /* Shared by both. The through-line. */
+  --fh-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fh-tracking-label: 0.2em;
+  --fh-tracking-display: -0.01em;
+
+  --fh-step-0: 1rem;
+  --fh-step-1: 1.125rem;
+  --fh-step-2: 1.35rem;
+  --fh-step-3: 1.7rem;
+  --fh-step-4: 2.2rem;
+  --fh-step-5: 3rem;
+  --fh-step-6: 4.4rem;
+
+  --fh-measure: 68ch;
+}
+
+/* --- schemes ------------------------------------------------------------- */
+/* Every pairing below clears WCAG AA for body text; series colours clear AA
+ * large. Ratios are in tokens.json, generated rather than asserted. */
+
+/* Glacier — primary dark. The lab and the models. */
+[data-scheme="glacier"] {
+  --fh-bg: #072430;
+  --fh-surface: #0e3646;
+  --fh-text: #eaf3f5;
+  --fh-text-muted: #93b7c4;
+  --fh-rule: #17475c;
+  --fh-accent: var(--fh-lichen);
+  --fh-accent-on: var(--fh-ink);
+  --fh-series-1: #1c7fa8;
+  --fh-series-2: var(--fh-glacier);
+  --fh-typeset: warm;
+}
+
+/* Atlas — primary light. Imhof's palette: shadow violet, bistre, ochre. */
+[data-scheme="atlas"] {
+  --fh-bg: var(--fh-vellum);
+  --fh-surface: #f7f3e8;
+  --fh-text: #221f1c;
+  --fh-text-muted: #5c5340;
+  --fh-rule: #d6cbb4;
+  --fh-accent: var(--fh-shadow);
+  --fh-accent-on: var(--fh-vellum);
+  --fh-series-1: var(--fh-bistre);
+  --fh-series-2: #bcd4dc;
+  --fh-typeset: warm;
+}
+
+/* Signal — secondary dark. Benchmarks and tools. */
+[data-scheme="signal"] {
+  --fh-bg: var(--fh-ink);
+  --fh-surface: var(--fh-basalt);
+  --fh-text: var(--fh-paper);
+  --fh-text-muted: var(--fh-scree);
+  --fh-rule: #26302a;
+  --fh-accent: var(--fh-lichen);
+  --fh-accent-on: var(--fh-ink);
+  --fh-series-1: var(--fh-alpine);
+  --fh-series-2: var(--fh-glacier);
+  --fh-typeset: technical;
+}
+
+/* Field — secondary light. Benchmarks and tools, and anything read at length. */
+[data-scheme="field"] {
+  --fh-bg: var(--fh-paper);
+  --fh-surface: var(--fh-white);
+  --fh-text: var(--fh-ink);
+  --fh-text-muted: #5d665c;
+  --fh-rule: #d6d9ce;
+  --fh-accent: var(--fh-moss);
+  --fh-accent-on: var(--fh-paper);
+  --fh-series-1: var(--fh-alpine);
+  --fh-series-2: var(--fh-moss);
+  --fh-typeset: technical;
+}
+
+/* Default, when nothing declares a scheme: the lab pair, following the OS. */
+:root { --fh-bg: #072430; --fh-surface: #0e3646; --fh-text: #eaf3f5;
+        --fh-text-muted: #93b7c4; --fh-rule: #17475c;
+        --fh-accent: var(--fh-lichen); --fh-accent-on: var(--fh-ink);
+        --fh-series-1: #1c7fa8; --fh-series-2: var(--fh-glacier); }
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-scheme]) {
+    --fh-bg: var(--fh-vellum); --fh-surface: #f7f3e8; --fh-text: #221f1c;
+    --fh-text-muted: #5c5340; --fh-rule: #d6cbb4;
+    --fh-accent: var(--fh-shadow); --fh-accent-on: var(--fh-vellum);
+    --fh-series-1: var(--fh-bistre); --fh-series-2: #bcd4dc;
+  }
+}
+
+/* --- roles --------------------------------------------------------------- */
+
+/* Any element carrying a scheme paints its own ground, so a scheme can be
+ * applied to <html> or to a single <section> and behave the same either way. */
+body,
+[data-scheme] {
+  background: var(--fh-bg);
+  color: var(--fh-text);
+}
+
+/* Warm typeset — the lab and the models. */
+[data-scheme="glacier"], [data-scheme="atlas"], :root:not([data-scheme]) {
+  --fh-face-display: var(--fh-font-display);
+  --fh-face-body: var(--fh-font-body);
+  --fh-display-settings: "opsz" 96, "SOFT" 24, "WONK" 1;
+  --fh-display-weight: 600;
+  --fh-body-weight: 400;
+}
+
+/* Technical typeset — benchmarks and tools. */
+[data-scheme="signal"], [data-scheme="field"] {
+  --fh-face-display: var(--fh-font-sans);
+  --fh-face-body: var(--fh-font-sans);
+  --fh-display-settings: "wght" 800, "wdth" 125;
+  --fh-display-weight: 800;
+  --fh-body-weight: 400;
+}
+
+.fh-display {
+  font-family: var(--fh-face-display);
+  font-variation-settings: var(--fh-display-settings);
+  font-weight: var(--fh-display-weight);
+  letter-spacing: var(--fh-tracking-display);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.fh-body {
+  font-family: var(--fh-face-body);
+  font-weight: var(--fh-body-weight);
+  line-height: 1.6;
+  max-width: var(--fh-measure);
+}
+
+/* Figures are mono and tabular in BOTH systems. An elevation and an eval score
+ * are the same kind of fact and must look like it. */
+.fh-data {
+  font-family: var(--fh-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.fh-label {
+  font-family: var(--fh-font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--fh-tracking-label);
+  color: var(--fh-text-muted);
+}
+
+:focus-visible { outline: 2px solid var(--fh-accent); outline-offset: 2px; }
