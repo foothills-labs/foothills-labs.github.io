@@ -31,9 +31,15 @@
   --fh-lichen: #c2dc2f;
   --fh-signal: var(--fh-lichen);   /* legacy alias */
 
-  /* Text placed ON a lichen fill. Constant across schemes, because lichen is
-   * always the light half of the pair. This token is what makes "signal is a
-   * fill, not an ink" mechanical rather than a thing to remember. */
+  /* Text placed ON a lichen fill: 12.30:1. This token is what makes "lichen
+   * is a fill, not an ink" (1.39:1 on paper) mechanical rather than a thing to
+   * remember.
+   *
+   * The lichen FILL is the standing exception to "one accent per scheme":
+   * buttons, pills and live tags stay lichen in every scheme, including Atlas,
+   * whose accent ink is shadow violet. One accent means one accent INK — the
+   * fill is a brand constant, one of the three through-lines (mark, fill,
+   * mono) that keep four schemes one brand. */
   --fh-on-lichen: #0c1110;
 
   --fh-ink: #0c1110;         /* near-black, green cast */
@@ -49,6 +55,10 @@
   --fh-shadow: #414a6b;      /* shadow violet */
   --fh-bistre: #7c6a52;      /* rock brown */
   --fh-ochre: #ce9b45;       /* warm light */
+
+  /* Text placed ON an ochre fill: 7.61:1. Ochre is the same trap as lichen —
+   * 2.01:1 on vellum, a fill and never an ink — so it gets the same railing. */
+  --fh-on-ochre: #0c1110;
   --fh-vellum: #ede6d6;      /* warm paper */
 
   /* --- type ------------------------------------------------------------- */
