@@ -175,18 +175,57 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Adding a custom domain later
+## Custom domain
 
-Not set up, and not needed for the `github.io` address to work. When you want
-one (e.g. `foothillslabs.dev`):
+The site is served at **`foothills-labs.com`**, declared by the `CNAME` file at
+the repo root. DNS is managed at Cloudflare. `github.io` redirects to it.
 
-1. At the DNS registrar, point the apex at GitHub's Pages IPs with four `A`
-   records — `185.199.108.153`, `185.199.109.153`, `185.199.110.153`,
-   `185.199.111.153` — and add a `CNAME` for `www` pointing at
-   `foothills-labs.github.io`.
-2. Enter the domain in **Settings → Pages → Custom domain**. GitHub commits a
-   `CNAME` file to this repo for you.
-3. Once DNS resolves, tick **Enforce HTTPS**.
+### DNS records
 
-Do not hand-create a `CNAME` file before the DNS records exist — Pages will
-serve the unresolvable domain and the site goes dark.
+All records are **DNS only (grey cloud)** — see the warning below.
+
+| Type | Name | Value |
+| --- | --- | --- |
+| `CNAME` | `@` | `foothills-labs.github.io` |
+| `CNAME` | `www` | `foothills-labs.github.io` |
+| `TXT` | `_github-pages-challenge-foothills-labs` | (token from the org's Pages settings) |
+
+Cloudflare flattens the apex `CNAME` to A records automatically, so there is no
+need to hard-code GitHub's four Pages IPs — and the record keeps working if
+those IPs ever change. If you ever do need them literally:
+`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`,
+plus `2606:50c0:8000::153` through `:8003::153` for AAAA.
+
+### The Cloudflare trap
+
+> **Keep the cloud grey.** Cloudflare proxies new records by default (orange
+> cloud). While a record is proxied, GitHub cannot see the DNS it needs to
+> issue the Let's Encrypt certificate, so **Enforce HTTPS** stays greyed out
+> with "your domain is not properly configured to support HTTPS" — and once
+> issued, a proxied record breaks the automatic 90-day renewal too.
+
+Leaving it grey is the recommendation, not just a setup step. GitHub Pages
+already fronts the site with a CDN and its own TLS, so proxying buys little and
+adds a recurring renewal failure.
+
+If you ever do enable the orange cloud, set **SSL/TLS → Full (strict)** first.
+`Flexible` makes Cloudflare talk HTTP to GitHub, which already redirects to
+HTTPS, and the result is an infinite redirect loop.
+
+### Order of operations
+
+The `CNAME` file makes GitHub redirect `foothills-labs.github.io` to the custom
+domain. Commit it **before** DNS resolves and both addresses are dark — the
+redirect target does not answer. So:
+
+1. Add the DNS records at Cloudflare, grey cloud.
+2. Confirm they resolve: `dig +short foothills-labs.com`.
+3. Merge the `CNAME` file to `main`.
+4. **Settings → Pages** shows the domain with a DNS check. Wait for the
+   certificate, then tick **Enforce HTTPS**.
+
+### Verify the domain
+
+Org **Settings → Pages → Verified domains** gives a TXT record to add. Worth
+doing: an unverified domain can be claimed by another GitHub account if the
+`CNAME` is ever removed while the DNS still points at GitHub.
