@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Foothills Labs</title>
+    <meta
+      name="description"
+      content="Foothills Labs builds open tools for evaluating and improving AI systems — benchmarks, leaderboards, and agent-driven experiment loops."
+    />
+    <link rel="canonical" href="https://foothills-labs.github.io/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Foothills Labs" />
+    <meta property="og:title" content="Foothills Labs" />
+    <meta
+      property="og:description"
+      content="Open tools for evaluating and improving AI systems — benchmarks, leaderboards, and agent-driven experiment loops."
+    />
+    <meta property="og:url" content="https://foothills-labs.github.io/" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M1 19.5 8 8l4.2 7 2.6-4 8.2 8.5H1Z"
+              fill="currentColor"
+              opacity=".9"
+            />
+            <circle cx="18.5" cy="5" r="2.4" fill="currentColor" opacity=".45" />
+          </svg>
+          Foothills Labs
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#about">About</a>
+          <a href="https://github.com/foothills-labs">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <p class="eyebrow">Applied research &amp; open tooling</p>
+          <h1>Measuring what language models actually get right.</h1>
+          <p class="lede">
+            Foothills Labs is a small applied research shop. We build open
+            benchmarks, evaluation harnesses, and experiment loops for the parts
+            of AI systems that are easy to demo and hard to verify.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#projects">Browse the projects</a>
+            <a class="btn btn-ghost" href="https://github.com/foothills-labs">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <svg
+          class="ridges"
+          viewBox="0 0 1440 150"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            fill="var(--ridge-far)"
+            d="M0 96 180 44l150 44 200-62 220 74 190-52 210 66 290-40v130H0Z"
+          />
+          <path
+            fill="var(--ridge-mid)"
+            d="M0 120 210 74l180 40 230-52 200 62 240-38 380 54v90H0Z"
+          />
+          <path
+            fill="var(--ridge-near)"
+            d="M0 150 260 108l190 30 250-40 230 44 260-26 250 34v10H0Z"
+          />
+        </svg>
+      </section>
+
+      <div class="wrap">
+        <section class="section" id="work">
+          <div class="section-head">
+            <h2>What we work on</h2>
+            <p>
+              Three threads, all pointed at the same problem: knowing whether a
+              model's output is correct, and knowing it cheaply enough to
+              iterate.
+            </p>
+          </div>
+
+          <div class="focus-grid">
+            <div class="focus">
+              <h3>Evaluation</h3>
+              <p>
+                Benchmarks that check semantic correctness rather than string
+                equality, and that surface failure modes a pass rate hides.
+              </p>
+            </div>
+            <div class="focus">
+              <h3>Leaderboards</h3>
+              <p>
+                Reproducible, open scoring pipelines — the harness, the data,
+                and the results published together so a number can be audited.
+              </p>
+            </div>
+            <div class="focus">
+              <h3>Agent loops</h3>
+              <p>
+                Automating the experiment cycle: propose a change, run it under
+                a time box, keep it only when the metric moves.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-head">
+            <h2>Projects</h2>
+            <p>Open source, Apache-2.0 licensed, and under active development.</p>
+          </div>
+
+          <div class="project-grid">
+            <a class="card" href="https://github.com/foothills-labs/regexbench">
+              <div class="card-title">
+                <h3>regexbench</h3>
+                <span class="arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <p>
+                Evaluate generated regular expressions: semantic equivalence,
+                correctness, and ReDoS safety.
+              </p>
+              <div class="tags">
+                <span class="tag">python</span>
+                <span class="tag">benchmark</span>
+                <span class="tag">apache-2.0</span>
+              </div>
+            </a>
+
+            <a
+              class="card"
+              href="https://github.com/foothills-labs/regexleaderboard"
+            >
+              <div class="card-title">
+                <h3>regexleaderboard</h3>
+                <span class="arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <p>
+                Open code behind a regular expression leaderboard — scoring,
+                submissions, and published results.
+              </p>
+              <div class="tags">
+                <span class="tag">leaderboard</span>
+                <span class="tag">evaluation</span>
+              </div>
+            </a>
+
+            <a class="card" href="https://github.com/foothills-labs/labloop">
+              <div class="card-title">
+                <h3>labloop</h3>
+                <span class="arrow" aria-hidden="true">&rarr;</span>
+              </div>
+              <p>
+                Agent-driven experiment loop: propose a change, run it
+                time-boxed, keep it only if the metric improves.
+              </p>
+              <div class="tags">
+                <span class="tag">python</span>
+                <span class="tag">agents</span>
+                <span class="tag">apache-2.0</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" id="about">
+          <div class="section-head">
+            <h2>About</h2>
+          </div>
+          <div class="about-body">
+            <p>
+              Foothills Labs is an independent lab working at the intersection
+              of applied mathematics and machine learning. The through-line
+              across our projects is verification: most interesting model
+              outputs are not exactly matchable against a reference, so the
+              scoring is the research problem.
+            </p>
+            <p>
+              Everything we can open, we open — harnesses, datasets, and the
+              scripts that produced the numbers. If something here is useful to
+              you, or wrong, please
+              <a href="https://github.com/foothills-labs">open an issue</a>.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>&copy; Foothills Labs</span>
+        <div class="footer-links">
+          <a href="https://github.com/foothills-labs">GitHub</a>
+          <a href="#main">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
