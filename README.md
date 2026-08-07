@@ -56,6 +56,29 @@ This matters most in light mode, where Atlas vellum and Field paper are close
 enough that a hard edge would barely register: the drawn boundary is what makes
 the transition legible without forcing the two grounds further apart.
 
+### Case
+
+One rule, both typesets, no exceptions:
+
+| | |
+| --- | --- |
+| **Headings** (`h1`–`h3`, data-table row headers) | Sentence case — warm and technical alike |
+| **Mono labels** (eyebrows, nav, buttons, tags, pills, column heads) | Uppercase, `0.2em` tracking |
+
+Uppercase is what marks a label as a label; spending it on headings too would
+leave the two roles looking alike. It would also wreck the package names in the
+Code band — `regexbench` and `labloop` are identifiers, and `REGEXBENCH` is a
+different string.
+
+`style.css` sets `text-transform: none` on headings explicitly rather than
+relying on the initial value, so the rule cannot drift back one heading at a
+time.
+
+> **Note:** `tokens.json` currently declares `typeset.technical.display.case:
+> "upper"`, and the warm typeset declares no `case` at all. Both are out of step
+> with the rule above and with `brand.md`'s Typography table. The fix belongs in
+> `foundation_lab` — the site is deliberately not following the declaration here.
+
 ### Fonts
 
 Self-hosted in `assets/fonts/`, no external requests. Fraunces and Newsreader

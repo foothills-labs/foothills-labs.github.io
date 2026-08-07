@@ -95,15 +95,31 @@ a { color: inherit; }
 
 /* --- type roles ---------------------------------------------------------- */
 
+/* CASE. One rule, both typesets, no exceptions:
+ *
+ *   headings are sentence case      — warm and technical alike
+ *   uppercase belongs to mono only  — eyebrows, nav, buttons, tags, pills,
+ *                                     column heads
+ *
+ * Uppercase is what marks a label as a label. Spending it on headings too
+ * would leave the two roles looking the same, and it would wreck the package
+ * names in the Code band — regexbench and labloop are identifiers, and
+ * REGEXBENCH is a different string. Declared here rather than left to the
+ * initial value so it cannot drift back one heading at a time. */
 h1, h2, h3 {
   font-family: var(--fh-face-display);
   font-variation-settings: var(--fh-display-settings);
   font-weight: var(--fh-display-weight);
   letter-spacing: var(--fh-tracking-display);
+  text-transform: none;
   line-height: 1.04;
   text-wrap: balance;
   margin: 0;
 }
+
+/* The display face also sets row headers in data tables — model names, phase
+   numbers. Same case rule applies. */
+.data-table tbody th { text-transform: none; }
 
 .eyebrow {
   font-family: var(--fh-font-mono);
