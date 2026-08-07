@@ -214,6 +214,10 @@ body,
   font-variant-numeric: tabular-nums;
 }
 
+/* The ONLY role that is uppercase. Headings in both typesets are sentence
+ * case — uppercase is what marks a label as a label, and it never touches
+ * identifiers: `regexbench` is a package name and REGEXBENCH is a different
+ * string. */
 .fh-label {
   font-family: var(--fh-font-mono);
   font-weight: 700;
