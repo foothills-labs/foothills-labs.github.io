@@ -6,7 +6,7 @@
     <title>Foothills Labs</title>
     <meta
       name="description"
-      content="Foothills Labs is a foundation model lab. Evaluation harnesses first, then fine-tuning small models, then up from there. Pre-alpha — nothing released yet."
+      content="Foothills Labs is a foundation model lab. Evaluation harnesses first, then fine-tuning small models, then up from there. regexbench and labloop are on PyPI; no models or results yet."
     />
     <link rel="canonical" href="https://foothills-labs.com/" />
 
@@ -59,7 +59,7 @@
     <main id="main">
       <section class="hero">
         <div class="wrap hero-inner">
-          <p class="eyebrow">Pre-alpha &middot; nothing released yet</p>
+          <p class="eyebrow">Pre-alpha &middot; two tools on PyPI, no models yet</p>
           <h1>A foundation lab.</h1>
           <p class="lede">
             The long-term goal is training models from the ground up. The
@@ -222,8 +222,9 @@
             <div class="section-head">
               <h2>Code</h2>
               <p>
-                Each released artifact gets its own repository. Apache-2.0, and
-                nothing is published to a registry yet.
+                Each released artifact gets its own repository, Apache-2.0.
+                <code>regexbench</code> and <code>labloop</code> are published
+                on PyPI; the leaderboard has no results yet.
               </p>
             </div>
 
@@ -240,7 +241,7 @@
                 <div class="tags">
                   <span class="tag">python</span>
                   <span class="tag">apache-2.0</span>
-                  <span class="tag" data-state="wip">scaffolding</span>
+                  <span class="tag" data-state="live">pypi 0.3.0</span>
                 </div>
               </a>
 
@@ -256,7 +257,7 @@
                 <div class="tags">
                   <span class="tag">python</span>
                   <span class="tag">apache-2.0</span>
-                  <span class="tag" data-state="wip">scaffolding</span>
+                  <span class="tag" data-state="live">pypi 0.2.0</span>
                 </div>
               </a>
 
@@ -266,12 +267,13 @@
                   <span class="arrow" aria-hidden="true">&rarr;</span>
                 </div>
                 <p>
-                  Open code behind a regular expression leaderboard — scoring,
-                  submissions, and published results.
+                  Runs <code>regexbench</code> across models and publishes the
+                  numbers — scores, methodology, and a re-run command. No
+                  results yet; the table ships empty until there are.
                 </p>
                 <div class="tags">
                   <span class="tag">evaluation</span>
-                  <span class="tag" data-state="wip">scaffolding</span>
+                  <span class="tag" data-state="wip">planning</span>
                 </div>
               </a>
             </div>
@@ -298,15 +300,15 @@
                 </tr>
               </thead>
               <tbody>
-                <tr data-state="now">
+                <tr>
                   <th scope="row" class="num mono">0</th>
                   <td>Repo, branding, project foundations</td>
-                  <td><span class="pill" data-state="now">In progress</span></td>
+                  <td><span class="pill">Done</span></td>
                 </tr>
-                <tr>
+                <tr data-state="now">
                   <th scope="row" class="num mono">1</th>
-                  <td>Benchmark harness and first eval suite</td>
-                  <td><span class="pill">Next</span></td>
+                  <td>Benchmark harness and first public leaderboard</td>
+                  <td><span class="pill" data-state="now">In progress</span></td>
                 </tr>
                 <tr>
                   <th scope="row" class="num mono">2</th>
