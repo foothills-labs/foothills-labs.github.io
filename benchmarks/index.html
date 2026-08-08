@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Benchmarks &middot; Foothills Labs</title>
+    <meta
+      name="description"
+      content="Foothills Labs benchmarks. No numbers yet — the table ships empty until there are. First planned run: regexbench across a dozen models."
+    />
+    <link rel="canonical" href="https://foothills-labs.com/benchmarks/" />
+    <meta name="theme-color" content="#0c1110" />
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png" />
+
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/archivo.woff2" crossorigin />
+
+    <link rel="stylesheet" href="/assets/tokens.css" />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <!-- data-scheme sits on body rather than html: tokens.css declares the
+       default :root block after the scheme blocks, so a scheme on the root
+       element loses the custom-property tie-break and renders Glacier. -->
+  <body data-scheme="signal">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Foothills Labs
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/#mission">Mission</a>
+          <a href="/#models">Models</a>
+          <a href="/#tools">Tools</a>
+          <a href="/#principles">Principles</a>
+          <a href="https://github.com/foothills-labs">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap basecamp" id="main">
+      <p class="eyebrow">Base camp &middot; Benchmarks</p>
+      <h1>You've reached base camp.</h1>
+      <p class="lede">
+        No numbers yet. The table ships empty until there are — that is the
+        rule, not an apology.
+      </p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption class="visually-hidden">
+            The benchmark results table, empty until there are results.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col" class="num">pass@1</th>
+              <th scope="col" class="num">dfa-eq@1</th>
+              <th scope="col" class="num">vulnerable@1</th>
+              <th scope="col" class="num">usable@1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="mono">&mdash;</th>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+            </tr>
+            <tr>
+              <th scope="row" class="mono">&mdash;</th>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+            </tr>
+            <tr>
+              <th scope="row" class="mono">&mdash;</th>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+              <td class="num mono">&mdash;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="note">
+        First planned run: <code>regexbench</code> 0.3.0 across a dozen models,
+        with methodology and a re-run command.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-ghost" href="/">&larr; Back to the lab</a>
+        <a class="btn btn-ghost" href="/tools/">Tools</a>
+        <a class="btn btn-ghost" href="https://github.com/foothills-labs">GitHub</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>&copy; Foothills Labs</span>
+        <div class="footer-links">
+          <a href="mailto:info@foothills-labs.com">info@foothills-labs.com</a>
+          <a href="https://github.com/foothills-labs">GitHub</a>
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
