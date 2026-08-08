@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tools &middot; Foothills Labs</title>
+    <meta
+      name="description"
+      content="Foothills Labs tools. regexbench and labloop are published on PyPI, Apache-2.0; the regex leaderboard is being pitched."
+    />
+    <link rel="canonical" href="https://foothills-labs.com/tools/" />
+    <meta name="theme-color" content="#f2f3ec" />
+
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png" />
+
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/archivo.woff2" crossorigin />
+
+    <link rel="stylesheet" href="/assets/tokens.css" />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <!-- data-scheme sits on body rather than html: tokens.css declares the
+       default :root block after the scheme blocks, so a scheme on the root
+       element loses the custom-property tie-break and renders Glacier. -->
+  <body data-scheme="field">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true"></span>
+          Foothills Labs
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/#mission">Mission</a>
+          <a href="/#models">Models</a>
+          <a href="/#tools">Tools</a>
+          <a href="/#principles">Principles</a>
+          <a href="https://github.com/foothills-labs">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap basecamp" id="main">
+      <p class="eyebrow">Base camp &middot; Tools</p>
+      <h1>You've reached base camp.</h1>
+      <p class="lede">
+        Base camp is provisioned: two tools are on PyPI, and the leaderboard
+        route is being pitched.
+      </p>
+
+      <div class="project-grid">
+        <a class="card" href="https://github.com/foothills-labs/regexbench">
+          <div class="card-title">
+            <h3>regexbench</h3>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </div>
+          <p>
+            Evaluate generated regular expressions: semantic equivalence,
+            correctness, and ReDoS safety.
+          </p>
+          <div class="tags">
+            <span class="tag">python</span>
+            <span class="tag">apache-2.0</span>
+            <span class="tag" data-state="live">pypi 0.3.0</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/foothills-labs/labloop">
+          <div class="card-title">
+            <h3>labloop</h3>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </div>
+          <p>
+            Agent-driven experiment loop: propose a change, run it time-boxed,
+            keep it only if the metric improves.
+          </p>
+          <div class="tags">
+            <span class="tag">python</span>
+            <span class="tag">apache-2.0</span>
+            <span class="tag" data-state="live">pypi 0.2.0</span>
+          </div>
+        </a>
+
+        <a class="card" href="https://github.com/foothills-labs/regexleaderboard">
+          <div class="card-title">
+            <h3>regexleaderboard</h3>
+            <span class="arrow" aria-hidden="true">&rarr;</span>
+          </div>
+          <p>
+            Runs <code>regexbench</code> across models and publishes the
+            numbers — scores, methodology, and a re-run command. No results
+            yet; the table ships empty until there are.
+          </p>
+          <div class="tags">
+            <span class="tag">evaluation</span>
+            <span class="tag" data-state="wip">planning</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-ghost" href="/">&larr; Back to the lab</a>
+        <a class="btn btn-ghost" href="/benchmarks/">Benchmarks</a>
+        <a class="btn btn-ghost" href="https://github.com/foothills-labs">GitHub</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>&copy; Foothills Labs</span>
+        <div class="footer-links">
+          <a href="mailto:info@foothills-labs.com">info@foothills-labs.com</a>
+          <a href="https://github.com/foothills-labs">GitHub</a>
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
