@@ -122,12 +122,15 @@ h1, h2, h3 {
    numbers. Same case rule applies. */
 .data-table tbody th { text-transform: none; }
 
+/* Eyebrows are lowercase by decision (2026-08): "01. the mission", not
+   "01. THE MISSION". The other mono labels (nav, buttons, tags, column heads)
+   keep uppercase until the wider branding pass. */
 .eyebrow {
   font-family: var(--fh-font-mono);
   font-weight: 700;
   font-size: 0.72rem;
   letter-spacing: var(--fh-tracking-label);
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--fh-text-muted);
   margin: 0;
 }
@@ -403,12 +406,17 @@ table { width: 100%; border-collapse: collapse; }
 .band .section:first-child { padding-top: clamp(1rem, 2.5vw, 2rem); }
 .band .section:last-child { padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
 
-/* Project cards are links; keep the underline off everything but the title on
-   hover, so a card reads as a card rather than a paragraph of link text. */
-a.card { text-decoration: none; transition: border-color 140ms ease-out; }
-a.card:hover { border-color: var(--fh-accent); }
-a.card:hover .card-title h3 { text-decoration: underline; text-underline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { a.card { transition: none; } }
+/* The card's title is the repository link, stretched over the whole card so
+   the card stays clickable; links inside the body sit above the stretch. Kept
+   as a div-plus-stretched-link rather than one big anchor so a card can carry
+   links of its own (labloop credits autoresearch). */
+.card { position: relative; transition: border-color 140ms ease-out; }
+.card:hover { border-color: var(--fh-accent); }
+.card-title a { text-decoration: none; }
+.card-title a::after { content: ""; position: absolute; inset: 0; }
+.card:hover .card-title h3 { text-decoration: underline; text-underline-offset: 3px; }
+.card p a { position: relative; z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
 
 /* --- brand mark ---------------------------------------------------------- */
 /* Masked rather than inlined, so the mark takes the scheme's accent without
@@ -435,10 +443,25 @@ a.card:hover .card-title h3 { text-decoration: underline; text-underline-offset:
 }
 
 /* --- mission ------------------------------------------------------------- */
-/* A placeholder, deliberately: the statement ships when it says exactly what
-   we mean. The section stays short until then. */
 
-.mission-stub {
+.mission-statement {
+  font-family: var(--fh-face-display);
+  font-variation-settings: var(--fh-display-settings);
+  font-weight: var(--fh-display-weight);
+  letter-spacing: var(--fh-tracking-display);
+  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  line-height: 1.28;
+  text-wrap: balance;
+  max-width: 34ch;
+  margin: 0 0 1.6rem;
+}
+
+.mission-body { max-width: var(--fh-measure); }
+.mission-body p { color: var(--fh-text-muted); margin: 0 0 1rem; }
+.mission-body p:last-child { margin-bottom: 0; }
+
+/* Short intro line under a section head. */
+.section-intro {
   font-size: 1.12rem;
   color: var(--fh-text-muted);
   max-width: var(--fh-measure);
