@@ -6,65 +6,69 @@
  *
  * Two decisions shape this file.
  *
- * 1. FOUR SCHEMES, PAIRED BY AREA. Glacier/Atlas carry the lab and the models;
- *    Signal/Field carry benchmarks and tools. A reader can tell which half of
- *    the lab they are in before reading a word.
+ * 1. FOUR SCHEMES, PAIRED BY AREA. Twilight/Cel carry the lab and the models;
+ *    Blueprint/Notepad carry benchmarks and tools. A reader can tell which
+ *    half of the lab they are in before reading a word.
  *
  * 2. TWO TYPE SYSTEMS. Warm serif for the lab and the models, grotesque and
  *    mono for benchmarks and tools. JetBrains Mono is shared by both, which is
  *    what keeps them one brand rather than two.
  *
  * Apply a scheme with data-scheme on any element; nest freely.
- *   <html data-scheme="glacier">     lab, models        (dark)
- *   <html data-scheme="atlas">       lab, models        (light)
- *   <html data-scheme="signal">      benchmarks, tools  (dark)
- *   <html data-scheme="field">       benchmarks, tools  (light)
+ *   <html data-scheme="twilight">    lab, models        (dark)
+ *   <html data-scheme="cel">         lab, models        (light)
+ *   <html data-scheme="blueprint">   benchmarks, tools  (dark)
+ *   <html data-scheme="notepad">     benchmarks, tools  (light)
  */
 
 :root {
-  /* --- palette ---------------------------------------------------------- */
+  /* --- palette: chalk --------------------------------------------------- */
 
-  /* Lichen. The one hot colour, and a fill rather than an ink: it holds dark
-   * text on a light ground but must never set text itself — 1.4:1 on paper.
-   * Print: closest Pantone Solid Coated is 584 C (dE2000 2.7); 382 C is the
-   * runner-up at 3.5. Confirm against a physical chip before any print run. */
-  --fh-lichen: #c2dc2f;
-  --fh-signal: var(--fh-lichen);   /* legacy alias */
+  /* Descended from the founder's pastel card, with two deliberate moves away
+   * from Anthropic's identity (warm cream ground + terracotta accent):
+   * the paper is COOL (chalk is b* 0.0; the warm cream it replaced was +4.8
+   * against their +4.1 — indistinguishable), and the warm accent is ROSE,
+   * not coral. Butterscotch, duck egg and smoke came through unchanged. */
 
-  /* Text placed ON a lichen fill: 12.30:1. This token is what makes "lichen
-   * is a fill, not an ink" (1.39:1 on paper) mechanical rather than a thing to
+  /* Butterscotch. The one hot colour, and a fill rather than an ink: it
+   * holds dark text but must never set text itself — 1.86:1 on chalk. It is
+   * the fill inside every glyph outline and the accent of both dark
+   * schemes. */
+  --fh-butterscotch: #e7a63e;
+
+  /* Text placed ON a butterscotch fill: 6.92:1. This token is what makes
+   * "butterscotch is a fill, not an ink" mechanical rather than a thing to
    * remember.
    *
-   * The lichen FILL is the standing exception to "one accent per scheme":
-   * buttons, pills and live tags stay lichen in every scheme, including Atlas,
-   * whose accent ink is shadow violet. One accent means one accent INK — the
-   * fill is a brand constant, one of the three through-lines (mark, fill,
-   * mono) that keep four schemes one brand. */
-  --fh-on-lichen: #0c1110;
+   * The butterscotch FILL is the standing exception to "one accent per
+   * scheme": buttons, pills and live tags stay butterscotch in every scheme,
+   * including Cel and Notepad, whose accent ink is emerald. One accent means
+   * one accent INK — the fill is a brand constant, one of the three
+   * through-lines (outline, fill, mono) that keep four schemes one brand. */
+  --fh-on-butterscotch: #26292b;
 
-  --fh-ink: #0c1110;         /* near-black, green cast */
-  --fh-basalt: #171e1a;      /* raised surface on ink */
-  --fh-moss: #39441f;        /* deep olive */
-  --fh-alpine: #12688f;      /* glacier-lake blue */
-  --fh-scree: #8c9689;       /* grey with a green bias */
-  --fh-glacier: #9cc7d8;     /* pale cyan */
-  --fh-paper: #f2f3ec;       /* warm off-white */
+  /* Rose is the same trap (1.97:1 on chalk) and gets the same railing:
+   * a fill and a panel ground, never an ink. */
+  --fh-rose: #ee93a9;
+  --fh-on-rose: #26292b;
+
+  --fh-sumi: #26292b;        /* cool near-black; every outline is drawn in it */
+  --fh-chalk: #edf1f0;       /* cool paper white — the light ground */
   --fh-white: #ffffff;
-
-  /* Atlas extends the palette with Imhof's aerial-perspective colours. */
-  --fh-shadow: #414a6b;      /* shadow violet */
-  --fh-bistre: #7c6a52;      /* rock brown */
-  --fh-ochre: #ce9b45;       /* warm light */
-
-  /* Text placed ON an ochre fill: 7.61:1. Ochre is the same trap as lichen —
-   * 2.01:1 on vellum, a fill and never an ink — so it gets the same railing. */
-  --fh-on-ochre: #0c1110;
-  --fh-vellum: #ede6d6;      /* warm paper */
+  --fh-mist: #dce6e6;        /* raised cool surface */
+  --fh-duckegg: #cbdfd4;     /* pale green; second series on dark */
+  --fh-smoke: #9dacba;       /* recessive detail and rules; never body text */
+  --fh-emerald: #2f6e70;     /* accent ink on light; panel ground on dark */
+  --fh-plum: #8e4763;        /* derived: rose fired dark; series on light */
+  --fh-night: #1e3c40;       /* derived: deep water; primary dark ground */
+  --fh-slate: #23464a;       /* raised surface on night */
+  --fh-print: #2e3a42;       /* derived: smoked slate; dark tools ground */
+  --fh-drafting: #38444c;    /* raised surface on print */
 
   /* --- type ------------------------------------------------------------- */
 
   /* Warm system — the lab and the models. Fraunces is built on deliberate
-   * irregularity, which is the same argument the logo makes. */
+   * irregularity, which is the same argument the drawings make. */
   --fh-font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --fh-font-body: "Newsreader", Georgia, "Times New Roman", serif;
 
@@ -89,77 +93,85 @@
 }
 
 /* --- schemes ------------------------------------------------------------- */
-/* Every pairing below clears WCAG AA for body text; series colours clear AA
- * large. Ratios are in tokens.json, generated rather than asserted. */
+/* Every pairing below clears WCAG AA for body text — including the accent on
+ * a raised surface, which the previous palette did not. Series colours clear
+ * AA large. Ratios are in tokens.json, generated rather than asserted, and
+ * build.py fails loudly if any sanctioned pairing slips. */
 
-/* Glacier — primary dark. The lab and the models. */
-[data-scheme="glacier"] {
-  --fh-bg: #072430;
-  --fh-surface: #0e3646;
-  --fh-text: #eaf3f5;
-  --fh-text-muted: #93b7c4;
-  --fh-rule: #17475c;
-  --fh-accent: var(--fh-lichen);
-  --fh-accent-on: var(--fh-ink);
-  --fh-series-1: #1c7fa8;
-  --fh-series-2: var(--fh-glacier);
+/* Twilight — primary dark. The lab and the models. Deep water: night ground,
+ * slate tiles, and the colour arriving through PANELS — emerald and rose
+ * grounds, butterscotch fills, rose and duck-egg series — rather than
+ * through the base ground. Dark pages are not monotone; they are dark paper
+ * that pastel things sit on. */
+[data-scheme="twilight"] {
+  --fh-bg: var(--fh-night);
+  --fh-surface: var(--fh-slate);
+  --fh-text: var(--fh-chalk);
+  --fh-text-muted: #a7c4c2;
+  --fh-rule: #33585c;
+  --fh-accent: var(--fh-butterscotch);
+  --fh-accent-on: var(--fh-sumi);
+  --fh-series-1: var(--fh-rose);
+  --fh-series-2: var(--fh-duckegg);
   --fh-typeset: warm;
 }
 
-/* Atlas — primary light. Imhof's palette: shadow violet, bistre, ochre. */
-[data-scheme="atlas"] {
-  --fh-bg: var(--fh-vellum);
-  --fh-surface: #f7f3e8;
-  --fh-text: #221f1c;
-  --fh-text-muted: #5c5340;
-  --fh-rule: #d6cbb4;
-  --fh-accent: var(--fh-shadow);
-  --fh-accent-on: var(--fh-vellum);
-  --fh-series-1: var(--fh-bistre);
-  --fh-series-2: #bcd4dc;
+/* Cel — primary light. Cool paper, sumi ink, white surfaces, one emerald
+ * accent. */
+[data-scheme="cel"] {
+  --fh-bg: var(--fh-chalk);
+  --fh-surface: var(--fh-white);
+  --fh-text: var(--fh-sumi);
+  --fh-text-muted: #5c6668;
+  --fh-rule: #dbe4e3;
+  --fh-accent: var(--fh-emerald);
+  --fh-accent-on: var(--fh-white);
+  --fh-series-1: var(--fh-emerald);
+  --fh-series-2: var(--fh-plum);
   --fh-typeset: warm;
 }
 
-/* Signal — secondary dark. Benchmarks and tools. */
-[data-scheme="signal"] {
-  --fh-bg: var(--fh-ink);
-  --fh-surface: var(--fh-basalt);
-  --fh-text: var(--fh-paper);
-  --fh-text-muted: var(--fh-scree);
-  --fh-rule: #26302a;
-  --fh-accent: var(--fh-lichen);
-  --fh-accent-on: var(--fh-ink);
-  --fh-series-1: var(--fh-alpine);
-  --fh-series-2: var(--fh-glacier);
+/* Blueprint — secondary dark. Benchmarks and tools, on smoked slate. */
+[data-scheme="blueprint"] {
+  --fh-bg: var(--fh-print);
+  --fh-surface: var(--fh-drafting);
+  --fh-text: var(--fh-white);
+  --fh-text-muted: #aebcc6;
+  --fh-rule: #46525b;
+  --fh-accent: var(--fh-butterscotch);
+  --fh-accent-on: var(--fh-sumi);
+  --fh-series-1: var(--fh-duckegg);
+  --fh-series-2: var(--fh-rose);
   --fh-typeset: technical;
 }
 
-/* Field — secondary light. Benchmarks and tools, and anything read at length. */
-[data-scheme="field"] {
-  --fh-bg: var(--fh-paper);
-  --fh-surface: var(--fh-white);
-  --fh-text: var(--fh-ink);
-  --fh-text-muted: #5d665c;
-  --fh-rule: #d6d9ce;
-  --fh-accent: var(--fh-moss);
-  --fh-accent-on: var(--fh-paper);
-  --fh-series-1: var(--fh-alpine);
-  --fh-series-2: var(--fh-moss);
+/* Notepad — secondary light. White page, mist tiles, emerald accent.
+ * For anything read at length. */
+[data-scheme="notepad"] {
+  --fh-bg: var(--fh-white);
+  --fh-surface: var(--fh-mist);
+  --fh-text: var(--fh-sumi);
+  --fh-text-muted: #4f5a5c;
+  --fh-rule: #c9d8d8;
+  --fh-accent: var(--fh-emerald);
+  --fh-accent-on: var(--fh-white);
+  --fh-series-1: var(--fh-emerald);
+  --fh-series-2: var(--fh-plum);
   --fh-typeset: technical;
 }
 
 /* Default, when nothing declares a scheme: the lab pair, following the OS. */
-:root { --fh-bg: #072430; --fh-surface: #0e3646; --fh-text: #eaf3f5;
-        --fh-text-muted: #93b7c4; --fh-rule: #17475c;
-        --fh-accent: var(--fh-lichen); --fh-accent-on: var(--fh-ink);
-        --fh-series-1: #1c7fa8; --fh-series-2: var(--fh-glacier); }
+:root { --fh-bg: #1e3c40; --fh-surface: #23464a; --fh-text: #edf1f0;
+        --fh-text-muted: #a7c4c2; --fh-rule: #33585c;
+        --fh-accent: var(--fh-butterscotch); --fh-accent-on: var(--fh-sumi);
+        --fh-series-1: var(--fh-rose); --fh-series-2: var(--fh-duckegg); }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-scheme]) {
-    --fh-bg: var(--fh-vellum); --fh-surface: #f7f3e8; --fh-text: #221f1c;
-    --fh-text-muted: #5c5340; --fh-rule: #d6cbb4;
-    --fh-accent: var(--fh-shadow); --fh-accent-on: var(--fh-vellum);
-    --fh-series-1: var(--fh-bistre); --fh-series-2: #bcd4dc;
+    --fh-bg: var(--fh-chalk); --fh-surface: var(--fh-white);
+    --fh-text: var(--fh-sumi); --fh-text-muted: #5c6668; --fh-rule: #dbe4e3;
+    --fh-accent: var(--fh-emerald); --fh-accent-on: var(--fh-white);
+    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-plum);
   }
 }
 
@@ -174,7 +186,7 @@ body,
 }
 
 /* Warm typeset — the lab and the models. */
-[data-scheme="glacier"], [data-scheme="atlas"], :root:not([data-scheme]) {
+[data-scheme="twilight"], [data-scheme="cel"], :root:not([data-scheme]) {
   --fh-face-display: var(--fh-font-display);
   --fh-face-body: var(--fh-font-body);
   --fh-display-settings: "opsz" 96, "SOFT" 24, "WONK" 1;
@@ -183,7 +195,7 @@ body,
 }
 
 /* Technical typeset — benchmarks and tools. */
-[data-scheme="signal"], [data-scheme="field"] {
+[data-scheme="blueprint"], [data-scheme="notepad"] {
   --fh-face-display: var(--fh-font-sans);
   --fh-face-body: var(--fh-font-sans);
   --fh-display-settings: "wght" 800, "wdth" 125;
@@ -191,12 +203,18 @@ body,
   --fh-body-weight: 400;
 }
 
+/* Display is LOWERCASE in both typesets — headlines, the lab name, section
+ * titles. Professional, with an air of levity; the transform makes it
+ * mechanical rather than a thing to remember. Proper nouns inside running
+ * body text keep their capitals — the transform applies to display roles
+ * only. */
 .fh-display {
   font-family: var(--fh-face-display);
   font-variation-settings: var(--fh-display-settings);
   font-weight: var(--fh-display-weight);
   letter-spacing: var(--fh-tracking-display);
   line-height: 1.02;
+  text-transform: lowercase;
   text-wrap: balance;
 }
 
@@ -207,17 +225,16 @@ body,
   max-width: var(--fh-measure);
 }
 
-/* Figures are mono and tabular in BOTH systems. An elevation and an eval score
- * are the same kind of fact and must look like it. */
+/* Figures are mono and tabular in BOTH systems. A flight time and an eval
+ * score are the same kind of fact and must look like it. */
 .fh-data {
   font-family: var(--fh-font-mono);
   font-variant-numeric: tabular-nums;
 }
 
-/* The ONLY role that is uppercase. Headings in both typesets are sentence
- * case — uppercase is what marks a label as a label, and it never touches
- * identifiers: `regexbench` is a package name and REGEXBENCH is a different
- * string. */
+/* The ONLY role that is uppercase. Display roles are lowercase — uppercase is
+ * what marks a label as a label, and it never touches identifiers:
+ * `regexbench` is a package name and REGEXBENCH is a different string. */
 .fh-label {
   font-family: var(--fh-font-mono);
   font-weight: 700;
