@@ -105,14 +105,17 @@ a { color: inherit; }
  * Uppercase is what marks a label as a label. Spending it on headings too
  * would leave the two roles looking the same, and it would wreck the package
  * names in the Code band — regexbench and labloop are identifiers, and
- * REGEXBENCH is a different string. Declared here rather than left to the
- * initial value so it cannot drift back one heading at a time. */
+ * REGEXBENCH is a different string.
+ *
+ * Display roles are LOWERCASE (2026-08, brand.md § Typography): headlines,
+ * the lab name, section titles. Professional with an air of levity, and a
+ * property of the role rather than something to remember per heading. */
 h1, h2, h3 {
   font-family: var(--fh-face-display);
   font-variation-settings: var(--fh-display-settings);
   font-weight: var(--fh-display-weight);
   letter-spacing: var(--fh-tracking-display);
-  text-transform: none;
+  text-transform: lowercase;
   line-height: 1.04;
   text-wrap: balance;
   margin: 0;
@@ -120,7 +123,7 @@ h1, h2, h3 {
 
 /* The display face also sets row headers in data tables — model names, phase
    numbers. Same case rule applies. */
-.data-table tbody th { text-transform: none; }
+.data-table tbody th { text-transform: lowercase; }
 
 /* Eyebrows are lowercase by decision (2026-08): "01. the mission", not
    "01. THE MISSION". The other mono labels (nav, buttons, tags, column heads)
@@ -171,6 +174,9 @@ code {
   font-weight: var(--fh-display-weight);
   font-size: 1.15rem;
   letter-spacing: -0.01em;
+  /* The in-page header sets the name in the surface's display face beside
+     the mark — lowercase either way (brand.md § Logo). */
+  text-transform: lowercase;
 }
 .brand svg { display: block; color: var(--fh-accent); flex: none; }
 
@@ -444,6 +450,10 @@ table { width: 100%; border-collapse: collapse; }
 
 /* --- mission ------------------------------------------------------------- */
 
+/* Deliberately NOT lowercased, though it is set in the display face. This is
+   a quotation, not a display role, and it contains an acronym — "ai systems"
+   reads as a typo rather than as levity. brand.md carves this out: the
+   lowercase transform is for display roles; quoted text keeps its capitals. */
 .mission-statement {
   font-family: var(--fh-face-display);
   font-variation-settings: var(--fh-display-settings);
