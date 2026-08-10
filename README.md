@@ -30,9 +30,15 @@ are in before reading a word:
 
 | Scheme | Where |
 | --- | --- |
-| **Glacier** (dark) / **Atlas** (light) | Default — the hero, mission, models, principles, contact, and `/models/`. Warm typeset: Fraunces + Newsreader. |
-| **Field** (light) | The band holding `#tools`, and `/tools/`. Typeset: Archivo. |
-| **Signal** (dark) | `/benchmarks/`. Typeset: Archivo. |
+| **Twilight** (dark) / **Cel** (light) | Default — the hero, mission, models, principles, contact, and `/models/`. Warm typeset: Fraunces + Newsreader. |
+| **Notepad** (light) | The band holding `#tools`, and `/tools/`. Typeset: Archivo. |
+| **Blueprint** (dark) | `/benchmarks/`. Typeset: Archivo. |
+
+**`data-scheme` goes on `<body>`, not `<html>`, on the pages that set one.**
+`tokens.css` declares its default `:root` block *after* the scheme blocks, so a
+scheme on the root element loses the custom-property tie-break and the page
+renders Twilight regardless. Moving that default above the scheme blocks
+upstream would remove the constraint.
 
 Apply with `data-scheme` on any element. Schemes nest and paint their own
 ground, so a results table can sit inside a lab page in its own scheme.
@@ -45,18 +51,23 @@ above it.
 
 ### Seams
 
-Where two schemes meet, the incoming scheme's ground **rises as a mountain
-range** into the outgoing scheme's sky: line-hatched ridge profiles, each peak
-filled with the incoming ground so nearer peaks occlude the ones behind, with
-nested slope lines converging toward each apex. Entering the band
-(`.seam-down`), the tools' paper ground rises into the lab's sky inked in
-moss; leaving it (`.seam-up`), the lab's own ground rises back inked in its
-accent — so no line ever sits on its own colour, and the drawn crest keeps the
-boundary legible where the two grounds are close (Atlas vellum against Field
-paper).
+Where two schemes meet, the ground changes along a **squiggle**: the incoming
+scheme's ground is filled to a smooth wave edge, the edge itself is inked, and
+one lower-opacity echo rides above it. Entering the band (`.seam-down`), the
+tools' white ground rises into the lab's sky inked in emerald; leaving it
+(`.seam-up`), the lab's own ground rises back inked in butterscotch, so no line
+ever sits on its own colour.
 
-The viewBox of every generated band is **fitted to the drawing** by the
-generator, so no line is clipped mid-stroke at the edge of the SVG.
+The register is the one Material 3 uses for its wavy dividers and progress
+tracks: one wavelength held across the whole drawing, generous amplitude, round
+caps. It replaces two earlier attempts — terrain contours, then origami
+pleats — both of which read as noise at page width.
+
+The seam's ground path carries `fill="currentColor"` as a presentation
+attribute as well as its class. That is deliberate: if this stylesheet is ever
+served stale against newer markup, the fill degrades to the inherited text
+colour instead of SVG's black default. An earlier pleated seam had no such
+guard, and a cached stylesheet rendered it as solid black sawteeth.
 
 ### Case
 
@@ -90,42 +101,63 @@ OFL 1.1, JetBrains Mono is Apache-2.0.
 
 ### Illustration
 
-Abstract mountaineering: line not fill, plan and section rather than scenery.
-The hero band is a contour section, drawn in the same language as the mark.
-**No horizons, no summits at sunset** — a literal ridge silhouette is the one
-thing the identity rules out, because it undoes the argument the mark makes.
+Line not fill, and drawn in the same language as the mark. The hero band is a
+**wave field**: one wavelength, one gap, one amplitude law, and a constant
+phase step from line to line, so the set nests and no two lines can ever cross.
+Tidiness is enforced by construction rather than by taste.
 
-The contour bands are **generated, not hand-drawn**, following the same rule as
-the marks in `foundation_lab`: change `assets/brand/contours.py` and re-run it,
-never the path data. The irregularity is deliberate — each line carries its own
-phase drift, so no two are parallel.
+The bands are **generated, not hand-drawn**, following the same rule as the
+marks in `foundation_lab`: change `assets/brand/waves.py` and re-run it, never
+the path data.
 
 ```sh
-python3 assets/brand/contours.py   # paste the output into index.html
+python3 assets/brand/waves.py   # paste the output into index.html
 ```
 
-They have to be inline SVG rather than `<img>`, because they read `currentColor`
-and the scheme custom properties.
+Curves are exact cubic-Bezier sine arches, one per half wavelength: for an arch
+of amplitude `A` over a half period `L/2`, control points at `L/6` and `L/3` at
+height `4A/3` put the curve's midpoint at exactly `A`. That is the closest a
+single cubic gets to a sinusoid, and it keeps the whole file near 5 KB.
+
+They have to be inline SVG rather than `<img>`, because they read
+`currentColor` and the scheme custom properties.
+
+### The house mark
+
+**The mark is shown in colour**, so it is a `background-image` rather than a
+masked shape: a mask can only take one colour, and the colour build carries
+rose, butterscotch and emerald facets under the line. That costs two builds,
+because the outline is sumi on light grounds and chalk on dark ones and a
+single file cannot be both. `style.css` resolves `--fh-mark` and
+`--fh-mark-small` per scheme, so markup just asks for the token.
+
+| Where | File |
+| --- | --- |
+| Hero, ~132 px | `mark-colour.svg` / `mark-colour-dark.svg` |
+| Header, 30 px | `mark-colour-small.svg` / `mark-colour-small-dark.svg` — reduced cut, front range only, heavier stroke |
+| Anything CSS must recolour | `mark.svg` — monoline, takes `currentColor` |
+
+Below about 40 px the back range breaks into stray pixels and the valleys silt
+up, which is what the reduced cut exists for.
+
+**Never inline the mark's path data into a page.** An earlier hero did, and the
+next rebrand swapped `mark.svg` underneath it: the header updated and the hero
+kept drawing the previous logo, because an inlined copy is a copy and not a
+reference.
 
 ### Model glyphs
 
-`assets/brand/marks/` holds the eight contour glyphs (full and `-small` cuts),
-generated with `foundation_lab/assets/marks/generate.py` and vendored here.
-They are applied as CSS masks so they take the scheme's accent colour:
+`assets/brand/marks/` holds the four paper-plane glyphs, generated in
+`foundation_lab` and vendored here. They are applied as CSS masks so they take
+the scheme's accent colour:
 
 ```html
-<span class="peak" style="--g: url(/assets/brand/marks/contour-everest.svg); ..."></span>
+<span class="peak" style="--g: url(/assets/brand/marks/plane-delta-mono.svg); ..."></span>
 ```
 
 The path **must be root-relative**. A `url()` inside a custom property resolves
 against the stylesheet that consumes it, not the document, so a relative path
 here resolves against `assets/` and 404s.
-
-> **Note:** the full glyphs follow the brand's 1,500 m contour interval, but
-> the **reduced cuts here carry the outermost *two* rings** instead of one —
-> one ring alone read too alike across the family. `foundation_lab`'s
-> generator still emits single-ring reduced cuts (`rings[:1]` in
-> `generate.py`); the two-ring change needs to land there or the repos drift.
 
 ## How this repo gets online
 
@@ -163,8 +195,8 @@ second path also requires switching **Settings → Pages → Source** to
 ```
 index.html        Landing page
 models/           /models/ — base camp page for the model range
-tools/            /tools/ — base camp page for the shipped tools (Field)
-benchmarks/       /benchmarks/ — base camp page, empty results table (Signal)
+tools/            /tools/ — base camp page for the shipped tools (Notepad)
+benchmarks/       /benchmarks/ — base camp page, empty results table (Blueprint)
 404.html          Custom not-found page (Pages serves this automatically)
 assets/
   style.css       All styling; light and dark via prefers-color-scheme
