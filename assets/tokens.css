@@ -22,21 +22,21 @@
  */
 
 :root {
-  /* --- palette ---------------------------------------------------------- */
+  /* --- palette: chalk --------------------------------------------------- */
 
-  /* The six reference colours came from the founder's pastel card: coral,
-   * blush, butterscotch, smoke, duck egg, emerald sea. Emerald is darkened a
-   * step for ink duty; night/slate, print/drafting and clay are DERIVED —
-   * dark grounds and a light-ground series ink a six-pastel card cannot
-   * supply. */
+  /* Descended from the founder's pastel card, with two deliberate moves away
+   * from Anthropic's identity (warm cream ground + terracotta accent):
+   * the paper is COOL (chalk is b* 0.0; the warm cream it replaced was +4.8
+   * against their +4.1 — indistinguishable), and the warm accent is ROSE,
+   * not coral. Butterscotch, duck egg and smoke came through unchanged. */
 
   /* Butterscotch. The one hot colour, and a fill rather than an ink: it
-   * holds dark text but must never set text itself — 1.96:1 on washi. It is
+   * holds dark text but must never set text itself — 1.86:1 on chalk. It is
    * the fill inside every glyph outline and the accent of both dark
    * schemes. */
   --fh-butterscotch: #e7a63e;
 
-  /* Text placed ON a butterscotch fill: 7.20:1. This token is what makes
+  /* Text placed ON a butterscotch fill: 6.92:1. This token is what makes
    * "butterscotch is a fill, not an ink" mechanical rather than a thing to
    * remember.
    *
@@ -45,25 +45,25 @@
    * including Cel and Notepad, whose accent ink is emerald. One accent means
    * one accent INK — the fill is a brand constant, one of the three
    * through-lines (outline, fill, mono) that keep four schemes one brand. */
-  --fh-on-butterscotch: #2b2422;
+  --fh-on-butterscotch: #26292b;
 
-  /* Coral is the same trap everywhere (1.86:1 on washi) and gets the same
-   * railing: a fill and a panel ground, never an ink. */
-  --fh-coral: #f7a283;
-  --fh-on-coral: #2b2422;
+  /* Rose is the same trap (1.97:1 on chalk) and gets the same railing:
+   * a fill and a panel ground, never an ink. */
+  --fh-rose: #ee93a9;
+  --fh-on-rose: #26292b;
 
-  --fh-sumi: #2b2422;        /* warm near-black; every outline is drawn in it */
-  --fh-washi: #faf6ed;       /* warm paper white */
+  --fh-sumi: #26292b;        /* cool near-black; every outline is drawn in it */
+  --fh-chalk: #edf1f0;       /* cool paper white — the light ground */
   --fh-white: #ffffff;
-  --fh-blush: #f7ddd3;       /* raised surface on the cel ground */
-  --fh-duckegg: #cbdfd4;     /* raised surface on notepad; series on dark */
+  --fh-mist: #dce6e6;        /* raised cool surface */
+  --fh-duckegg: #cbdfd4;     /* pale green; second series on dark */
   --fh-smoke: #9dacba;       /* recessive detail and rules; never body text */
-  --fh-emerald: #376f71;     /* accent ink on light; panel ground on dark */
-  --fh-clay: #b85c40;        /* derived: coral fired dark; series on light */
-  --fh-night: #22474a;       /* derived: deep water; primary dark ground */
-  --fh-slate: #2d5559;       /* raised surface on night */
-  --fh-print: #333e48;       /* derived: smoked slate; dark tools ground */
-  --fh-drafting: #3e4a55;    /* raised surface on print */
+  --fh-emerald: #2f6e70;     /* accent ink on light; panel ground on dark */
+  --fh-plum: #8e4763;        /* derived: rose fired dark; series on light */
+  --fh-night: #1e3c40;       /* derived: deep water; primary dark ground */
+  --fh-slate: #23464a;       /* raised surface on night */
+  --fh-print: #2e3a42;       /* derived: smoked slate; dark tools ground */
+  --fh-drafting: #38444c;    /* raised surface on print */
 
   /* --- type ------------------------------------------------------------- */
 
@@ -93,39 +93,41 @@
 }
 
 /* --- schemes ------------------------------------------------------------- */
-/* Every pairing below clears WCAG AA for body text; series colours clear AA
- * large. Ratios are in tokens.json, generated rather than asserted. */
+/* Every pairing below clears WCAG AA for body text — including the accent on
+ * a raised surface, which the previous palette did not. Series colours clear
+ * AA large. Ratios are in tokens.json, generated rather than asserted, and
+ * build.py fails loudly if any sanctioned pairing slips. */
 
 /* Twilight — primary dark. The lab and the models. Deep water: night ground,
- * slate tiles, and the colour arriving through PANELS — emerald and coral
- * grounds, butterscotch fills, coral and duck-egg series — rather than
+ * slate tiles, and the colour arriving through PANELS — emerald and rose
+ * grounds, butterscotch fills, rose and duck-egg series — rather than
  * through the base ground. Dark pages are not monotone; they are dark paper
  * that pastel things sit on. */
 [data-scheme="twilight"] {
   --fh-bg: var(--fh-night);
   --fh-surface: var(--fh-slate);
-  --fh-text: var(--fh-washi);
-  --fh-text-muted: #afc9c5;
-  --fh-rule: #3b6165;
+  --fh-text: var(--fh-chalk);
+  --fh-text-muted: #a7c4c2;
+  --fh-rule: #33585c;
   --fh-accent: var(--fh-butterscotch);
   --fh-accent-on: var(--fh-sumi);
-  --fh-series-1: var(--fh-coral);
+  --fh-series-1: var(--fh-rose);
   --fh-series-2: var(--fh-duckegg);
   --fh-typeset: warm;
 }
 
-/* Cel — primary light. Paper white, sumi ink, blush surfaces, one emerald
+/* Cel — primary light. Cool paper, sumi ink, white surfaces, one emerald
  * accent. */
 [data-scheme="cel"] {
-  --fh-bg: var(--fh-washi);
+  --fh-bg: var(--fh-chalk);
   --fh-surface: var(--fh-white);
   --fh-text: var(--fh-sumi);
-  --fh-text-muted: #6e6259;
-  --fh-rule: #e8dcd2;
+  --fh-text-muted: #5c6668;
+  --fh-rule: #dbe4e3;
   --fh-accent: var(--fh-emerald);
   --fh-accent-on: var(--fh-white);
   --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-clay);
+  --fh-series-2: var(--fh-plum);
   --fh-typeset: warm;
 }
 
@@ -134,42 +136,42 @@
   --fh-bg: var(--fh-print);
   --fh-surface: var(--fh-drafting);
   --fh-text: var(--fh-white);
-  --fh-text-muted: #aebcc8;
-  --fh-rule: #4c5a66;
+  --fh-text-muted: #aebcc6;
+  --fh-rule: #46525b;
   --fh-accent: var(--fh-butterscotch);
   --fh-accent-on: var(--fh-sumi);
   --fh-series-1: var(--fh-duckegg);
-  --fh-series-2: var(--fh-coral);
+  --fh-series-2: var(--fh-rose);
   --fh-typeset: technical;
 }
 
-/* Notepad — secondary light. White page, duck-egg tiles, emerald accent.
+/* Notepad — secondary light. White page, mist tiles, emerald accent.
  * For anything read at length. */
 [data-scheme="notepad"] {
   --fh-bg: var(--fh-white);
-  --fh-surface: var(--fh-duckegg);
+  --fh-surface: var(--fh-mist);
   --fh-text: var(--fh-sumi);
-  --fh-text-muted: #525e60;
-  --fh-rule: #dce6de;
+  --fh-text-muted: #4f5a5c;
+  --fh-rule: #c9d8d8;
   --fh-accent: var(--fh-emerald);
   --fh-accent-on: var(--fh-white);
   --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-clay);
+  --fh-series-2: var(--fh-plum);
   --fh-typeset: technical;
 }
 
 /* Default, when nothing declares a scheme: the lab pair, following the OS. */
-:root { --fh-bg: #22474a; --fh-surface: #2d5559; --fh-text: #faf6ed;
-        --fh-text-muted: #afc9c5; --fh-rule: #3b6165;
+:root { --fh-bg: #1e3c40; --fh-surface: #23464a; --fh-text: #edf1f0;
+        --fh-text-muted: #a7c4c2; --fh-rule: #33585c;
         --fh-accent: var(--fh-butterscotch); --fh-accent-on: var(--fh-sumi);
-        --fh-series-1: var(--fh-coral); --fh-series-2: var(--fh-duckegg); }
+        --fh-series-1: var(--fh-rose); --fh-series-2: var(--fh-duckegg); }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-scheme]) {
-    --fh-bg: var(--fh-washi); --fh-surface: var(--fh-white);
-    --fh-text: var(--fh-sumi); --fh-text-muted: #6e6259; --fh-rule: #e8dcd2;
+    --fh-bg: var(--fh-chalk); --fh-surface: var(--fh-white);
+    --fh-text: var(--fh-sumi); --fh-text-muted: #5c6668; --fh-rule: #dbe4e3;
     --fh-accent: var(--fh-emerald); --fh-accent-on: var(--fh-white);
-    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-clay);
+    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-plum);
   }
 }
 
