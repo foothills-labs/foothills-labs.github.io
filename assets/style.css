@@ -8,9 +8,9 @@
  * Rules: https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand.md
  *
  * Scheme use on this site:
- *   glacier / atlas   the lab and the models  — default, /models/
- *   field             tools                   — the #tools band, /tools/
- *   signal            benchmarks              — /benchmarks/
+ *   twilight / cel   the lab and the models  — default, /models/
+ *   notepad           tools                   — the #tools band, /tools/
+ *   blueprint         benchmarks              — /benchmarks/
  */
 
 /* --- faces --------------------------------------------------------------- */
@@ -227,8 +227,8 @@ code {
   border: 1px solid transparent;
 }
 .btn-primary {
-  background: var(--fh-lichen);
-  color: var(--fh-on-lichen);
+  background: var(--fh-butterscotch);
+  color: var(--fh-on-butterscotch);
 }
 .btn-primary:hover { filter: brightness(1.07); }
 .btn-ghost {
@@ -299,7 +299,7 @@ code {
   border: 1px solid var(--fh-rule);
   color: var(--fh-text-muted);
 }
-.tag[data-state="live"] { background: var(--fh-lichen); color: var(--fh-on-lichen); border-color: transparent; }
+.tag[data-state="live"] { background: var(--fh-butterscotch); color: var(--fh-on-butterscotch); border-color: transparent; }
 
 /* --- about --------------------------------------------------------------- */
 
@@ -358,7 +358,7 @@ table { width: 100%; border-collapse: collapse; }
   opacity: 0.8;
   margin-top: clamp(1.25rem, 3vw, 2.25rem);
 }
-[data-scheme="atlas"] .contours,
+[data-scheme="cel"] .contours,
 :root:not([data-scheme]) .contours { opacity: 0.62; }
 
 /* --- scheme seams -------------------------------------------------------- */
@@ -379,12 +379,12 @@ table { width: 100%; border-collapse: collapse; }
 /* Entering the band, the tools' paper ground rises into the lab's sky; the
    ink is the incoming scheme's accent, so no line sits on its own colour. */
 .seam-down { background: var(--fh-bg); }
-.seam-down .range-fill { fill: var(--fh-paper); }
+.seam-down .range-fill { fill: var(--fh-white); }
 .seam-down .range-hatch path,
-.seam-down .range-crest { stroke: var(--fh-moss); }
+.seam-down .range-crest { stroke: var(--fh-emerald); }
 
 /* Leaving it, the lab's own ground rises back, inked with its accent. */
-.seam-up { background: var(--fh-paper); }
+.seam-up { background: var(--fh-white); }
 .seam-up .range-fill { fill: var(--fh-bg); }
 .seam-up .range-hatch path,
 .seam-up .range-crest { stroke: var(--fh-accent); }
