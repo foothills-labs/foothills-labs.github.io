@@ -71,26 +71,24 @@ guard, and a cached stylesheet rendered it as solid black sawteeth.
 
 ### Case
 
-One rule, both typesets, no exceptions:
+The display rule changed in 2026-08 and `style.css` now follows it:
 
 | | |
 | --- | --- |
-| **Headings** (`h1`–`h3`, data-table row headers) | Sentence case — warm and technical alike |
-| **Mono labels** (eyebrows, nav, buttons, tags, pills, column heads) | Uppercase, `0.2em` tracking |
+| **Display roles** (`h1`–`h3`, the brand lockup, data-table row headers) | **Lowercase** — `text-transform: lowercase`, so it is a property of the role rather than a thing to remember per heading |
+| **Mono labels** (nav, buttons, tags, pills, column heads) | Uppercase, `0.2em` tracking |
+| **Eyebrows** | Lowercase mono — `01. the mission`, not `01. THE MISSION` |
+| **Body text and pull quotes** | Keep their capitals |
 
-Uppercase is what marks a label as a label; spending it on headings too would
-leave the two roles looking alike. It would also wreck the package names in the
-Code band — `regexbench` and `labloop` are identifiers, and `REGEXBENCH` is a
-different string.
+That last row is the one that is easy to get wrong. `brand.md` is explicit
+that **a quotation keeps its capitals even when set in the display face**,
+because a pull quote is body voice printed large rather than a display role.
+The mission statement on the home page is styled by `.mission-statement`,
+which deliberately does *not* inherit the `h1`–`h3` lowercase rule.
 
-`style.css` sets `text-transform: none` on headings explicitly rather than
-relying on the initial value, so the rule cannot drift back one heading at a
-time.
-
-> **Note:** `tokens.json` currently declares `typeset.technical.display.case:
-> "upper"`, and the warm typeset declares no `case` at all. Both are out of step
-> with the rule above and with `brand.md`'s Typography table. The fix belongs in
-> `foundation_lab` — the site is deliberately not following the declaration here.
+Uppercase still marks a label as a label, and it would still wreck the package
+names — `regexbench` and `labloop` are identifiers, and `REGEXBENCH` is a
+different string — which is why the mono label role never contains one.
 
 ### Fonts
 
@@ -194,9 +192,9 @@ second path also requires switching **Settings → Pages → Source** to
 
 ```
 index.html        Landing page
-models/           /models/ — base camp page for the model range
-tools/            /tools/ — base camp page for the shipped tools (Notepad)
-benchmarks/       /benchmarks/ — base camp page, empty results table (Blueprint)
+models/           /models/ — preflight page for the model range
+tools/            /tools/ — preflight page for the shipped tools (Notepad)
+benchmarks/       /benchmarks/ — preflight page, empty results table (Blueprint)
 404.html          Custom not-found page (Pages serves this automatically)
 assets/
   style.css       All styling; light and dark via prefers-color-scheme
