@@ -613,14 +613,14 @@ table { width: 100%; border-collapse: collapse; }
    it a different string. The button keeps the mono and drops the transform. */
 .btn-mail { text-transform: none; letter-spacing: 0.02em; font-size: 0.92rem; }
 
-/* --- base camp ----------------------------------------------------------- */
+/* --- preflight ----------------------------------------------------------- */
 /* The dedicated pages, before there is anything to show on them. */
 
-.basecamp {
+.preflight {
   padding-block: clamp(3rem, 8vw, 6rem) clamp(2rem, 5vw, 3.5rem);
   display: grid;
   gap: 1.35rem;
   align-content: start;
 }
-.basecamp h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); max-width: 16ch; }
-.basecamp .cta-row { margin-top: 0.4rem; }
+.preflight h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); max-width: 16ch; }
+.preflight .cta-row { margin-top: 0.4rem; }
