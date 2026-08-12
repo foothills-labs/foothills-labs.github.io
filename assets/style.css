@@ -466,8 +466,9 @@ table { width: 100%; border-collapse: collapse; }
   --fh-mark-small: url("/assets/brand/mark-colour-small.svg");
 }
 
-/* Below about 40px the back range breaks into stray pixels, so the header
-   takes the reduced cut: same drawing, front range only, heavier stroke. */
+/* The small build is the same drawing as the hero, one weight heavier, so
+   the line holds at 30px. It is a weight change and nothing else: the back
+   range stays in, because the header and the hero have to be one logo. */
 .brand-mark {
   width: 30px;
   height: 30px;
