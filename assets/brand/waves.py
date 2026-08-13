@@ -29,19 +29,18 @@ currentColor and the scheme custom properties, which an <img> cannot.
 W = 1440
 
 
-def wave(y, amp, wl, phase=0.0, width=W, start_down=False):
+def wave(y, amp, wl, phase=0.0):
     """A smooth sinusoid as cubic Bezier arches, one per half wavelength.
 
     `phase` shifts the wave left in viewBox units; the SVG viewport clips the
     overhang, which is how lines are offset without changing their shape.
     """
     half = wl / 2.0
-    x0 = -phase
     # Whole arches only, so the line always leaves the frame mid-curve.
-    n = int((width + phase) / half) + 2
+    n = int((W + phase) / half) + 2
     c = amp * 4.0 / 3.0
-    sign = -1.0 if start_down else 1.0
-    d = [f"M{x0:.1f} {y:.2f}"]
+    sign = 1.0
+    d = [f"M{-phase:.1f} {y:.2f}"]
     for _ in range(n):
         d.append(
             f"c{half / 3:.1f} {-c * sign:.2f} {half * 2 / 3:.1f} "
@@ -51,9 +50,9 @@ def wave(y, amp, wl, phase=0.0, width=W, start_down=False):
     return "".join(d)
 
 
-def wave_area(y, amp, wl, phase, height, width=W):
+def wave_area(y, amp, wl, phase, height):
     """The same wave, closed down to the bottom edge: a filled ground."""
-    return f"{wave(y, amp, wl, phase, width)}V{height:.0f}H{-phase - 40:.0f}Z"
+    return f"{wave(y, amp, wl, phase)}V{height:.0f}H{-phase - 40:.0f}Z"
 
 
 def waves(n=6, wl=600.0, amp=16.0, gap=22.0, top=28.0):

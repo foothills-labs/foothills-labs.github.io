@@ -173,7 +173,7 @@ code {
   font-variation-settings: var(--fh-display-settings);
   font-weight: var(--fh-display-weight);
   font-size: 1.15rem;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--fh-tracking-display);
   /* The in-page header sets the name in the surface's display face beside
      the mark — lowercase either way (brand.md § Logo). */
   text-transform: lowercase;
@@ -317,12 +317,6 @@ code {
   color: var(--fh-text-muted);
 }
 .tag[data-state="live"] { background: var(--fh-butterscotch); color: var(--fh-on-butterscotch); border-color: transparent; }
-
-/* --- about --------------------------------------------------------------- */
-
-.about-body { max-width: var(--fh-measure); }
-.about-body p { color: var(--fh-text-muted); }
-.about-body p:first-child { color: var(--fh-text); font-size: 1.12rem; }
 
 /* --- footer -------------------------------------------------------------- */
 
@@ -570,10 +564,15 @@ table { width: 100%; border-collapse: collapse; }
 .data-table tbody tr:last-child td { border-bottom: none; }
 
 /* --- the range ----------------------------------------------------------- */
-/* The model family as an archipelago, seen from above and unnamed. Each peak
-   is a contour glyph (ring count is elevation / 1,500, so complexity IS the
-   tier), masked so it takes the scheme's accent. Opacity recedes with
-   distance — Imhof's aerial perspective again. */
+/* The model family, unnamed until there is something to name. One paper-plane
+   glyph per planned model, masked so each takes the scheme's accent, placed
+   by inline left/top/width because the composition is art-directed rather
+   than laid out.
+   Width and opacity both ascend with capability tier, which is the naming
+   system drawn rather than stated: glider, delta, canard, hammer. Keep that
+   order if the numbers are ever retuned, or the picture contradicts
+   brand.md. (.peak is a fossil of the mountain-era glyphs; the class name
+   outlived the drawing.) */
 
 .range {
   position: relative;
