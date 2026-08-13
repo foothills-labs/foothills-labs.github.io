@@ -173,16 +173,22 @@ code {
   font-variation-settings: var(--fh-display-settings);
   font-weight: var(--fh-display-weight);
   font-size: 1.15rem;
-  letter-spacing: -0.01em;
+  letter-spacing: var(--fh-tracking-display);
   /* The in-page header sets the name in the surface's display face beside
      the mark — lowercase either way (brand.md § Logo). */
   text-transform: lowercase;
 }
 .brand svg { display: block; color: var(--fh-accent); flex: none; }
 
+/* The header .wrap wraps the nav onto its own line, but the nav has to wrap
+   its own items too: five uppercase mono labels measure ~408px, which is
+   wider than a 390px phone, and without this the page scrolls sideways. The
+   row gap is tighter than the column gap so a wrapped second row sits close
+   to the first rather than reading as a separate block. */
 .site-nav {
   display: flex;
-  gap: 1.6rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
   font-family: var(--fh-font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
@@ -312,12 +318,6 @@ code {
 }
 .tag[data-state="live"] { background: var(--fh-butterscotch); color: var(--fh-on-butterscotch); border-color: transparent; }
 
-/* --- about --------------------------------------------------------------- */
-
-.about-body { max-width: var(--fh-measure); }
-.about-body p { color: var(--fh-text-muted); }
-.about-body p:first-child { color: var(--fh-text); font-size: 1.12rem; }
-
 /* --- footer -------------------------------------------------------------- */
 
 .site-footer {
@@ -392,7 +392,11 @@ table { width: 100%; border-collapse: collapse; }
 }
 
 /* Entering the band, the tools' paper ground rises into the lab's sky, inked
-   in emerald so the line never sits on its own colour. */
+   in emerald so the line never sits on its own colour.
+   COUPLING: the seam sits OUTSIDE the band it transitions into, so it cannot
+   inherit the band's scheme. --fh-white and --fh-emerald below are literals
+   that must equal the notepad scheme's --fh-bg and --fh-accent; if that
+   scheme is ever repainted upstream, retune these two by hand. */
 .seam-down { background: var(--fh-bg); }
 .seam-down .wave-ground { color: var(--fh-white); }
 .seam-down .wave-crest,
@@ -466,8 +470,9 @@ table { width: 100%; border-collapse: collapse; }
   --fh-mark-small: url("/assets/brand/mark-colour-small.svg");
 }
 
-/* Below about 40px the back range breaks into stray pixels, so the header
-   takes the reduced cut: same drawing, front range only, heavier stroke. */
+/* The small build is the same drawing as the hero, one weight heavier, so
+   the line holds at 30px. It is a weight change and nothing else: the back
+   range stays in, because the header and the hero have to be one logo. */
 .brand-mark {
   width: 30px;
   height: 30px;
@@ -563,10 +568,15 @@ table { width: 100%; border-collapse: collapse; }
 .data-table tbody tr:last-child td { border-bottom: none; }
 
 /* --- the range ----------------------------------------------------------- */
-/* The model family as an archipelago, seen from above and unnamed. Each peak
-   is a contour glyph (ring count is elevation / 1,500, so complexity IS the
-   tier), masked so it takes the scheme's accent. Opacity recedes with
-   distance — Imhof's aerial perspective again. */
+/* The model family, unnamed until there is something to name. One paper-plane
+   glyph per planned model, masked so each takes the scheme's accent, placed
+   by inline left/top/width because the composition is art-directed rather
+   than laid out.
+   Width and opacity both ascend with capability tier, which is the naming
+   system drawn rather than stated: glider, delta, canard, hammer. Keep that
+   order if the numbers are ever retuned, or the picture contradicts
+   brand.md. (.peak is a fossil of the mountain-era glyphs; the class name
+   outlived the drawing.) */
 
 .range {
   position: relative;
