@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Page not found &middot; Foothills Labs</title>
     <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#1e3c40" />
+
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png" />
+
+    <!-- This page carries no data-scheme, so it renders in the warm default
+         pair: Fraunces and Newsreader for the heading and lede, JetBrains
+         Mono for the nav, eyebrow and button. All four are above the fold on
+         a page this short, and it previously preloaded none of them. -->
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/fraunces.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/newsreader.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/jetbrains-mono-400.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2"
+          href="/assets/fonts/jetbrains-mono-700.woff2" crossorigin />
+
     <link rel="stylesheet" href="/assets/tokens.css" />
     <link rel="stylesheet" href="/assets/style.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href="/">
@@ -26,7 +45,7 @@
       </div>
     </header>
 
-    <main class="wrap notfound">
+    <main class="wrap notfound" id="main">
       <p class="code">404</p>
       <h1>Here, there be dragons.</h1>
       <p class="lede">
