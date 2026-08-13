@@ -18,7 +18,9 @@ summary: One or two sentences for the index page and search results.
 ---
 
 Write standard markdown here. Tables, fenced code blocks and footnotes work
-(the `extra` extension set); raw HTML passes through if you need it.
+(the `extra` extension set); raw HTML passes through if you need it. One
+renderer quirk worth knowing: nested list items need a four-space indent,
+not two, or they flatten into the parent list.
 
 Two conventions, both load-bearing:
 
