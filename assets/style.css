@@ -774,4 +774,9 @@ table { width: 100%; border-collapse: collapse; }
   .article-body code,
   .article-body pre { background: #f2f4f3; }
   .article-body pre { border-color: #d5dbd9; }
+  .article-body .footnote { color: #5b6663; }
+  /* No scrollbars on paper: code wraps and tables lay out as tables again,
+     so wide content folds instead of clipping at the page edge. */
+  .article-body pre { white-space: pre-wrap; overflow-wrap: break-word; }
+  .article-body table { display: table; width: 100%; }
 }

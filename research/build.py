@@ -288,11 +288,17 @@ def print_pdf(chromium, url, pdf_path):
 # --- sitemap -----------------------------------------------------------------
 
 def update_sitemap(slugs):
-    """Replace the research <url> entries, leaving the rest untouched."""
+    """Replace this site's /research/ entries, leaving everything else alone.
+
+    The match is anchored to the full site prefix: a bare "/research/"
+    substring match would silently delete any future unrelated URL that
+    happens to contain it (say, /blog/research-notes/methodology/).
+    """
     path = os.path.join(ROOT, "sitemap.xml")
     text = open(path).read()
-    text = re.sub(r"  <url>\s*<loc>[^<]*/research/[^<]*</loc>.*?</url>\n",
-                  "", text, flags=re.S)
+    text = re.sub(
+        rf"[ \t]*<url>\s*<loc>{re.escape(SITE)}/research/[^<]*</loc>.*?</url>\n",
+        "", text, flags=re.S)
     urls = [f"{SITE}/research/"] + [f"{SITE}/research/{s}/" for s in slugs]
     block = "".join(
         f"  <url>\n    <loc>{u}</loc>\n    <changefreq>monthly</changefreq>\n"
@@ -333,7 +339,10 @@ def main():
         if "—" in body_md or "—" in str(meta):
             print(f"  NOTE  {name} contains an em-dash;"
                   " the site's copy carries none by decision")
-        slug = meta.get("slug") or slugify(name[:-3])
+        # The override goes through slugify too: it is the one field
+        # that reaches a filesystem path and an href, so it is
+        # normalized to [a-z0-9-] rather than trusted.
+        slug = slugify(meta.get("slug") or name[:-3])
         taken = {s: n for n, s in seen}
         if slug in taken:
             sys.exit(f"{name}: slug {slug!r} is already used by"
