@@ -180,9 +180,15 @@ code {
 }
 .brand svg { display: block; color: var(--fh-accent); flex: none; }
 
+/* The header .wrap wraps the nav onto its own line, but the nav has to wrap
+   its own items too: five uppercase mono labels measure ~408px, which is
+   wider than a 390px phone, and without this the page scrolls sideways. The
+   row gap is tighter than the column gap so a wrapped second row sits close
+   to the first rather than reading as a separate block. */
 .site-nav {
   display: flex;
-  gap: 1.6rem;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
   font-family: var(--fh-font-mono);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
