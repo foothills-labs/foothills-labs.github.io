@@ -132,11 +132,20 @@ single file cannot be both. `style.css` resolves `--fh-mark` and
 | Where | File |
 | --- | --- |
 | Hero, ~132 px | `mark-colour.svg` / `mark-colour-dark.svg` |
-| Header, 30 px | `mark-colour-small.svg` / `mark-colour-small-dark.svg` — reduced cut, front range only, heavier stroke |
+| Header, 30 px | `mark-colour-small.svg` / `mark-colour-small-dark.svg` — same drawing, heavier stroke |
+| Favicon | `assets/favicon.svg` — the small build inside the rounded badge |
 | Anything CSS must recolour | `mark.svg` — monoline, takes `currentColor` |
 
-Below about 40 px the back range breaks into stray pixels and the valleys silt
-up, which is what the reduced cut exists for.
+**Every build draws the same mountains**: three peaks in front, two behind.
+The small build differs from the hero in stroke weight alone — 18 against 15,
+which is what keeps the line from thinning away at 30 px. Nothing is dropped
+from the drawing. An earlier small build cut the back range on the theory that
+it silted up below 40 px; it does not, and the site shipped two logos as a
+result, one in the header and favicon and another in the hero.
+
+If a size ever does need a reduced cut, cut it in *all* the places that size is
+used — header, favicon and touch icon together — or the mark stops being one
+mark again.
 
 **Never inline the mark's path data into a page.** An earlier hero did, and the
 next rebrand swapped `mark.svg` underneath it: the header updated and the hero
