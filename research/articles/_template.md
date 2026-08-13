@@ -1,0 +1,33 @@
+---
+# Copy this file to <anything>.md in this folder and fill it in; files whose
+# names start with _ are never built. Then, from the repo root:
+#
+#     python3 research/build.py
+#
+# and commit everything it writes (the article page, its PDF, the research
+# index, and the sitemap). Nothing under research/<slug>/ is hand-edited.
+#
+# Required keys:
+title: A short, specific title
+date: 2026-01-01
+summary: One or two sentences for the index page and search results.
+# Optional keys:
+#   authors: Adrian Tame          (defaults to "Foothills Labs")
+#   slug: custom-url-name         (defaults to the file name)
+#   draft: true                   (build nothing until it is removed)
+---
+
+Write standard markdown here. Tables, fenced code blocks and footnotes work
+(the `extra` extension set); raw HTML passes through if you need it. One
+renderer quirk worth knowing: nested list items need a four-space indent,
+not two, or they flatten into the parent list.
+
+Two conventions, both load-bearing:
+
+1. **Asset paths are root-relative.** Link whitepapers and images as
+   `/research/papers/your-paper.pdf` or `/assets/...`, never relatively.
+   The article page lives at `/research/<slug>/`, so a relative path would
+   resolve somewhere you do not expect.
+2. **Whitepaper PDFs go in `research/papers/`**, committed like any other
+   file, and linked from the article body. The article's own PDF is
+   generated for you; the whitepapers are yours to drop in.

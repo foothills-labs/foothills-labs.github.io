@@ -634,3 +634,149 @@ table { width: 100%; border-collapse: collapse; }
 }
 .preflight h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); max-width: 16ch; }
 .preflight .cta-row { margin-top: 0.4rem; }
+
+/* --- research ------------------------------------------------------------- */
+/* Long-form articles, generated from markdown by research/build.py. The
+   register sits between the homepage and a model card: warm serif at reading
+   measure, quiet chrome, the data in mono. Deliberately no wave art here;
+   the words carry the page.
+
+   CASE CARVE-OUT: the global heading rule lowercases display roles, but an
+   article's title and headings are authored prose, not chrome, in the same
+   way brand.md exempts pull quotes ("body voice printed large"). Forcing
+   them through the transform would mangle acronyms and identifiers: "AI"
+   becomes "ai", "ReDoS" becomes "redos". So content headings keep their
+   capitals, and the same applies to titles listed on the index. */
+
+.article { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.article-head,
+.article-body,
+.article-back { max-width: var(--fh-measure); }
+
+.article-head { display: grid; gap: 0.9rem; margin-bottom: 2.25rem; }
+.article-head h1 {
+  font-size: clamp(2rem, 4.6vw, 3.2rem);
+  text-transform: none;
+}
+.article-meta {
+  font-family: var(--fh-font-mono);
+  font-size: 0.78rem;
+  color: var(--fh-text-muted);
+  margin: 0;
+}
+.article-meta a { color: var(--fh-accent); }
+
+.article-body h2,
+.article-body h3,
+.article-body h4 { text-transform: none; margin: 2.2rem 0 0.7rem; }
+.article-body h2 { font-size: 1.5rem; }
+.article-body h3 { font-size: 1.2rem; }
+.article-body p { margin: 0 0 1rem; }
+.article-body a { text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.article-body ul,
+.article-body ol { margin: 0 0 1rem; padding-left: 1.4rem; }
+.article-body li { margin-bottom: 0.35rem; }
+
+.article-body blockquote {
+  margin: 1.4rem 0;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  border-left: 3px solid var(--fh-accent);
+  color: var(--fh-text-muted);
+}
+.article-body blockquote p:last-child { margin-bottom: 0; }
+
+.article-body code {
+  font-size: 0.88em;
+  background: var(--fh-surface);
+  padding: 0.1em 0.35em;
+}
+.article-body pre {
+  background: var(--fh-surface);
+  border: 1px solid var(--fh-rule);
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  margin: 1.4rem 0;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+.article-body pre code { background: none; padding: 0; font-size: inherit; }
+
+/* Markdown emits bare tables, so the table is its own scroll container:
+   display block trades a little table semantics for never letting a wide
+   table scroll the page sideways on a phone. */
+.article-body table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1.4rem 0;
+}
+.article-body th,
+.article-body td {
+  text-align: left;
+  padding: 0.5rem 1.2rem 0.5rem 0;
+  border-bottom: 1px solid var(--fh-rule);
+}
+.article-body th {
+  font-family: var(--fh-font-mono);
+  font-weight: 700;
+  font-size: 0.68rem;
+  letter-spacing: var(--fh-tracking-label);
+  text-transform: uppercase;
+  color: var(--fh-text-muted);
+  border-bottom-width: 2px;
+  border-bottom-color: var(--fh-text);
+}
+
+.article-body img { max-width: 100%; height: auto; }
+.article-body hr { border: 0; border-top: 1px solid var(--fh-rule); margin: 2rem 0; }
+.article-body .footnote { font-size: 0.88rem; color: var(--fh-text-muted); }
+
+.article-back { margin: 2.5rem 0 0; font-family: var(--fh-font-mono); font-size: 0.8rem; }
+
+/* The index: date in the margin, title and summary beside it. */
+.research-list { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.research-entry {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0.35rem 1.5rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid var(--fh-rule);
+}
+.research-entry:last-child { border-bottom: 1px solid var(--fh-rule); }
+.research-date { font-size: 0.78rem; color: var(--fh-text-muted); margin: 0; padding-top: 0.35rem; }
+.research-entry h2 { font-size: 1.25rem; text-transform: none; margin: 0 0 0.3rem; }
+.research-entry h2 a { text-decoration: none; }
+.research-entry h2 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.research-entry p { margin: 0; color: var(--fh-text-muted); font-size: 0.95rem; max-width: 62ch; }
+@media (max-width: 40rem) {
+  .research-entry { grid-template-columns: 1fr; gap: 0.15rem; }
+  .research-date { padding-top: 0; }
+}
+
+/* --- print ---------------------------------------------------------------- */
+/* Article pages double as their own PDFs: build.py prints them through
+   Chromium, so this block IS the PDF layout. One fixed light look, in
+   literals on purpose; a PDF does not follow the reader's OS theme. */
+@media print {
+  @page { margin: 18mm 16mm; }
+  body { background: #ffffff; color: #26292b; font-size: 11pt; }
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .article-back,
+  .article-pdf-link { display: none; }  /* the PDF linking to itself */
+  .article { padding-block: 0; }
+  .article-head h1 { color: #26292b; }
+  .article-meta,
+  .eyebrow { color: #5b6663; }
+  .article-body a { color: #26292b; }
+  .article-body blockquote { border-left-color: #26292b; color: #5b6663; }
+  .article-body code,
+  .article-body pre { background: #f2f4f3; }
+  .article-body pre { border-color: #d5dbd9; }
+  .article-body .footnote { color: #5b6663; }
+  /* No scrollbars on paper: code wraps and tables lay out as tables again,
+     so wide content folds instead of clipping at the page edge. */
+  .article-body pre { white-space: pre-wrap; overflow-wrap: break-word; }
+  .article-body table { display: table; width: 100%; }
+}
