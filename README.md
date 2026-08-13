@@ -166,6 +166,28 @@ The path **must be root-relative**. A `url()` inside a custom property resolves
 against the stylesheet that consumes it, not the document, so a relative path
 here resolves against `assets/` and 404s.
 
+## Research
+
+The one part of the site that is written in markdown. `research/articles/`
+holds the sources; `research/build.py` compiles them:
+
+```sh
+pip install markdown            # once; the only authoring dependency
+python3 research/build.py       # pages + PDFs + index + sitemap
+```
+
+Commit everything it writes. Each article becomes `/research/<slug>/` plus a
+PDF of the same page, printed through the print stylesheet (Chromium is found
+via `$CHROME` or the Playwright install; without one, pages build without the
+PDF link). The index at `/research/` and the research entries in `sitemap.xml`
+are regenerated on every run, so neither is ever edited by hand — the
+generated pages all share one header/footer template inside `build.py`, unlike
+the five hand-written pages, which still carry copies.
+
+`research/articles/_template.md` documents the front matter and the two
+conventions that matter: asset paths are root-relative, and whitepaper PDFs
+are hand-dropped into `research/papers/` and linked from the article body.
+
 ## How this repo gets online
 
 This repo is an **organization Pages site**, which is a special case in GitHub
@@ -204,6 +226,7 @@ index.html        Landing page
 models/           /models/ — preflight page for the model range
 tools/            /tools/ — preflight page for the shipped tools (Notepad)
 benchmarks/       /benchmarks/ — preflight page, empty results table (Blueprint)
+research/         /research/ — articles and analyses, generated from markdown
 404.html          Custom not-found page (Pages serves this automatically)
 assets/
   style.css       All styling; light and dark via prefers-color-scheme
