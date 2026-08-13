@@ -321,6 +321,7 @@ def main():
         server, port = serve_site()
 
     entries = []
+    seen = []
     for name in sorted(os.listdir(ARTICLES)):
         if not name.endswith(".md") or name.startswith("_"):
             continue
@@ -333,6 +334,11 @@ def main():
             print(f"  NOTE  {name} contains an em-dash;"
                   " the site's copy carries none by decision")
         slug = meta.get("slug") or slugify(name[:-3])
+        taken = {s: n for n, s in seen}
+        if slug in taken:
+            sys.exit(f"{name}: slug {slug!r} is already used by"
+                     f" {taken[slug]!r}; two articles cannot share a URL")
+        seen.append((name, slug))
         out_dir = os.path.join(RESEARCH, slug)
         os.makedirs(out_dir, exist_ok=True)
         out_html = os.path.join(out_dir, "index.html")
