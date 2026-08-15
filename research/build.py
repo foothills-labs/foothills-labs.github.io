@@ -109,7 +109,7 @@ def chrome_head(title, description, canonical):
     <title>{html.escape(title)} &middot; Foothills Labs</title>
     <meta name="description" content="{html.escape(description)}" />
     <link rel="canonical" href="{canonical}" />
-    <meta name="theme-color" content="#1e3c40" />
+    <meta name="theme-color" content="#05192B" />
 
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png" />
