@@ -14,14 +14,37 @@ The visual system is defined in
 | Reasoning | [`docs/brand-rationale.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand-rationale.md) |
 | Logo files | [`assets/logo/`](https://github.com/foothills-labs/foundation_lab/tree/main/assets/logo) |
 
-**`assets/tokens.css` and `assets/tokens.json` are copies, not sources.** They
-come from `assets/tokens/` in `foundation_lab`. To change a colour or a
-typeface, change it there, regenerate the JSON with `build.py`, and copy both
-files across — that is what stops the site and the brand guide drifting apart.
-The JSON carries the generated contrast matrix and fill guards, so the
+**`assets/tokens.css`, `assets/tokens.json`, the favicon, the marks and the
+plane glyphs are copies, not sources.** They come from `foundation_lab`.
+`tools/vendor.py` holds the manifest and does the copying:
+
+```sh
+python3 tools/vendor.py --check    # fail if any copy has drifted
+python3 tools/vendor.py --sync     # refresh the copies from upstream
+```
+
+Both take `--upstream PATH`, defaulting to `../foundation_lab`. To change a
+colour, a typeface or the mark, change it **there**, regenerate, then `--sync`
+here. The JSON carries the generated contrast matrix and fill guards, so the
 "generated rather than asserted" claim in the CSS header holds next to the copy
-too. `assets/style.css` holds only site-specific
-layout and components, and reads everything else from tokens.
+too. `assets/style.css` holds only site-specific layout and components, and
+reads everything else from tokens.
+
+Saying that was not enough on its own. The copies drifted twice: the site
+hand-edited `favicon.svg` and the small marks to restore the back range and
+never sent it upstream, so for three days the two repos disagreed about what
+the logo was; and the harbour repaint landed upstream while the site went on
+shipping the previous palette, because "vendor the new tokens" was a step
+someone had to remember. `.github/workflows/vendor-parity.yml` now runs
+`--check` on every push and pull request, so drift fails CI instead of shipping.
+
+That guard needs a `FOUNDATION_LAB_TOKEN` secret, because `foundation_lab` is
+private and this repo is public — without it the job **skips**, and the guard is
+inert. The workflow says so in its run summary.
+
+**One direction only.** `--sync` copies upstream → here and never the reverse.
+An edit to a vendored file in this repo is the thing that broke last time;
+`--check` will catch it and tell you to go upstream.
 
 ### Schemes on this site
 
@@ -137,11 +160,18 @@ single file cannot be both. `style.css` resolves `--fh-mark` and
 | Anything CSS must recolour | `mark.svg` — monoline, takes `currentColor` |
 
 **Every build draws the same mountains**: three peaks in front, two behind.
-The small build differs from the hero in stroke weight alone — 18 against 15,
-which is what keeps the line from thinning away at 30 px. Nothing is dropped
-from the drawing. An earlier small build cut the back range on the theory that
-it silted up below 40 px; it does not, and the site shipped two logos as a
+The small build differs from the hero in stroke weight alone, which is what
+keeps the line from thinning away at 30 px. Nothing is dropped from the
+drawing. An earlier small build cut the back range on the theory that it
+silted up below 40 px; it does not, and the site shipped two logos as a
 result, one in the header and favicon and another in the hero.
+
+This is now the rule **upstream** too, rather than a local correction the site
+kept re-applying to vendored files. `foundation_lab` retired its reduced cut on
+2026-08-15 and its generator emits the full drawing at every size; print was
+measured before adopting, and the small cut's minimum moved 4.6 mm → 5.2 mm on
+typical coated offset. So these files now arrive correct from `--sync` and no
+longer need touching here.
 
 If a size ever does need a reduced cut, cut it in *all* the places that size is
 used — header, favicon and touch icon together — or the mark stops being one
