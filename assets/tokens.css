@@ -34,36 +34,41 @@
    * holds dark text but must never set text itself — 1.86:1 on chalk. It is
    * the fill inside every glyph outline and the accent of both dark
    * schemes. */
-  --fh-butterscotch: #e7a63e;
+  --fh-butterscotch: #EE8B33;
 
-  /* Text placed ON a butterscotch fill: 6.92:1. This token is what makes
+  /* Text placed ON a butterscotch fill: 7.1:1. This token is what makes
    * "butterscotch is a fill, not an ink" mechanical rather than a thing to
-   * remember.
+   * remember. It stays a fill on every ground — 2.14:1 on chalk.
    *
    * The butterscotch FILL is the standing exception to "one accent per
    * scheme": buttons, pills and live tags stay butterscotch in every scheme,
-   * including Cel and Notepad, whose accent ink is emerald. One accent means
+   * including Cel and Notepad, whose accent ink is rose. One accent means
    * one accent INK — the fill is a brand constant, one of the three
    * through-lines (outline, fill, mono) that keep four schemes one brand. */
-  --fh-on-butterscotch: #26292b;
+  --fh-on-butterscotch: #05192B;
 
-  /* Rose is the same trap (1.97:1 on chalk) and gets the same railing:
-   * a fill and a panel ground, never an ink. */
-  --fh-rose: #ee93a9;
-  --fh-on-rose: #26292b;
+  /* Rose is NO LONGER a fill-only colour. Harbour moved it from a pale pink
+   * to a burnt rust, which made it the accent INK on the light schemes
+   * (9.16:1 on chalk) — see Cel and Notepad below. It is still usable as a
+   * fill, so it keeps a guard, but the guard had to flip with the value:
+   * near-black on rust is 1.65:1, cream on rust is 9.16:1. */
+  --fh-rose: #6A2A12;
+  --fh-on-rose: #FAEBD3;
 
-  --fh-sumi: #26292b;        /* cool near-black; every outline is drawn in it */
-  --fh-chalk: #edf1f0;       /* cool paper white — the light ground */
+  --fh-sumi: #05192B;        /* cool near-black; every outline is drawn in it */
+  --fh-chalk: #FAEBD3;       /* cool paper white — the light ground */
   --fh-white: #ffffff;
-  --fh-mist: #dce6e6;        /* raised cool surface */
-  --fh-duckegg: #cbdfd4;     /* pale green; second series on dark */
-  --fh-smoke: #9dacba;       /* recessive detail and rules; never body text */
-  --fh-emerald: #2f6e70;     /* accent ink on light; panel ground on dark */
-  --fh-plum: #8e4763;        /* derived: rose fired dark; series on light */
-  --fh-night: #1e3c40;       /* derived: deep water; primary dark ground */
-  --fh-slate: #23464a;       /* raised surface on night */
-  --fh-print: #2e3a42;       /* derived: smoked slate; dark tools ground */
-  --fh-drafting: #38444c;    /* raised surface on print */
+  --fh-warmwhite: #FFF9EF;   /* raised surface on the cream ground —
+                                lighter than the paper, not whiter than it */
+  --fh-mist: #DEEAEE;        /* raised cool surface */
+  --fh-duckegg: #9ABCC6;     /* pale green; second series on dark */
+  --fh-smoke: #829AA1;       /* recessive detail and rules; never body text */
+  --fh-emerald: #31606D;     /* accent ink on light; panel ground on dark */
+  --fh-plum: #FFB881;        /* derived: rose fired dark; series on light */
+  --fh-night: #05192B;       /* derived: deep water; primary dark ground */
+  --fh-slate: #132538;       /* raised surface on night */
+  --fh-print: #082C35;       /* derived: smoked slate; dark tools ground */
+  --fh-drafting: #1D3E47;    /* raised surface on print */
 
   /* --- type ------------------------------------------------------------- */
 
@@ -107,12 +112,12 @@
   --fh-bg: var(--fh-night);
   --fh-surface: var(--fh-slate);
   --fh-text: var(--fh-chalk);
-  --fh-text-muted: #a7c4c2;
-  --fh-rule: #33585c;
+  --fh-text-muted: #9CB5BC;
+  --fh-rule: #25364A;
   --fh-accent: var(--fh-butterscotch);
   --fh-accent-on: var(--fh-sumi);
-  --fh-series-1: var(--fh-rose);
-  --fh-series-2: var(--fh-duckegg);
+  --fh-series-1: var(--fh-duckegg);
+  --fh-series-2: var(--fh-plum);
   --fh-typeset: warm;
 }
 
@@ -120,14 +125,14 @@
  * accent. */
 [data-scheme="cel"] {
   --fh-bg: var(--fh-chalk);
-  --fh-surface: var(--fh-white);
+  --fh-surface: var(--fh-warmwhite);
   --fh-text: var(--fh-sumi);
-  --fh-text-muted: #5c6668;
-  --fh-rule: #dbe4e3;
-  --fh-accent: var(--fh-emerald);
-  --fh-accent-on: var(--fh-white);
+  --fh-text-muted: #436974;
+  --fh-rule: #E5D5BB;
+  --fh-accent: var(--fh-rose);
+  --fh-accent-on: var(--fh-chalk);
   --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-plum);
+  --fh-series-2: var(--fh-rose);
   --fh-typeset: warm;
 }
 
@@ -136,12 +141,12 @@
   --fh-bg: var(--fh-print);
   --fh-surface: var(--fh-drafting);
   --fh-text: var(--fh-white);
-  --fh-text-muted: #aebcc6;
-  --fh-rule: #46525b;
+  --fh-text-muted: #9CB5BC;
+  --fh-rule: #395760;
   --fh-accent: var(--fh-butterscotch);
   --fh-accent-on: var(--fh-sumi);
-  --fh-series-1: var(--fh-duckegg);
-  --fh-series-2: var(--fh-rose);
+  --fh-series-1: var(--fh-plum);
+  --fh-series-2: var(--fh-duckegg);
   --fh-typeset: technical;
 }
 
@@ -151,27 +156,65 @@
   --fh-bg: var(--fh-white);
   --fh-surface: var(--fh-mist);
   --fh-text: var(--fh-sumi);
-  --fh-text-muted: #4f5a5c;
-  --fh-rule: #c9d8d8;
-  --fh-accent: var(--fh-emerald);
-  --fh-accent-on: var(--fh-white);
+  --fh-text-muted: #436974;
+  --fh-rule: #CADADF;
+  --fh-accent: var(--fh-rose);
+  --fh-accent-on: var(--fh-chalk);
   --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-plum);
+  --fh-series-2: var(--fh-rose);
   --fh-typeset: technical;
 }
 
 /* Default, when nothing declares a scheme: the lab pair, following the OS. */
-:root { --fh-bg: #1e3c40; --fh-surface: #23464a; --fh-text: #edf1f0;
-        --fh-text-muted: #a7c4c2; --fh-rule: #33585c;
+:root { --fh-bg: #05192B; --fh-surface: #132538; --fh-text: #FAEBD3;
+        --fh-text-muted: #9CB5BC; --fh-rule: #25364A;
         --fh-accent: var(--fh-butterscotch); --fh-accent-on: var(--fh-sumi);
-        --fh-series-1: var(--fh-rose); --fh-series-2: var(--fh-duckegg); }
+        --fh-series-1: var(--fh-duckegg); --fh-series-2: var(--fh-plum);
+        /* The technical band's ground, exposed so page furniture that
+         * straddles the boundary — seams, dividers — can reference it
+         * instead of hard-coding a colour. Follows the same switch. */
+        --fh-band-bg: var(--fh-print); --fh-band-surface: var(--fh-drafting);
+        --fh-band-ink: var(--fh-butterscotch); }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-scheme]) {
-    --fh-bg: var(--fh-chalk); --fh-surface: var(--fh-white);
-    --fh-text: var(--fh-sumi); --fh-text-muted: #5c6668; --fh-rule: #dbe4e3;
-    --fh-accent: var(--fh-emerald); --fh-accent-on: var(--fh-white);
-    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-plum);
+    --fh-bg: var(--fh-chalk); --fh-surface: var(--fh-warmwhite);
+    --fh-text: var(--fh-sumi); --fh-text-muted: #436974; --fh-rule: #E5D5BB;
+    --fh-accent: var(--fh-rose); --fh-accent-on: var(--fh-chalk);
+    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-rose);
+    --fh-band-bg: var(--fh-white); --fh-band-surface: var(--fh-mist);
+    --fh-band-ink: var(--fh-emerald);
+  }
+}
+
+/* A technical band that FOLLOWS the page rather than pinning itself. Hard-
+ * coding a band to notepad leaves a full-bleed white slab in the middle of a
+ * dark page; this resolves to blueprint at night and notepad by day, using
+ * the same dark-first shape :root uses for twilight/cel. */
+[data-scheme="technical"] {
+  --fh-bg: var(--fh-print);
+  --fh-surface: var(--fh-drafting);
+  --fh-text: var(--fh-white);
+  --fh-text-muted: #9CB5BC;
+  --fh-rule: #395760;
+  --fh-accent: var(--fh-butterscotch);
+  --fh-accent-on: var(--fh-sumi);
+  --fh-series-1: var(--fh-plum);
+  --fh-series-2: var(--fh-duckegg);
+  --fh-typeset: technical;
+}
+
+@media (prefers-color-scheme: light) {
+  [data-scheme="technical"] {
+    --fh-bg: var(--fh-white);
+    --fh-surface: var(--fh-mist);
+    --fh-text: var(--fh-sumi);
+    --fh-text-muted: #436974;
+    --fh-rule: #CADADF;
+    --fh-accent: var(--fh-rose);
+    --fh-accent-on: var(--fh-chalk);
+    --fh-series-1: var(--fh-emerald);
+    --fh-series-2: var(--fh-rose);
   }
 }
 
@@ -195,7 +238,8 @@ body,
 }
 
 /* Technical typeset — benchmarks and tools. */
-[data-scheme="blueprint"], [data-scheme="notepad"] {
+[data-scheme="blueprint"], [data-scheme="notepad"],
+[data-scheme="technical"] {
   --fh-face-display: var(--fh-font-sans);
   --fh-face-body: var(--fh-font-sans);
   --fh-display-settings: "wght" 800, "wdth" 125;
