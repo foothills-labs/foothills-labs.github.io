@@ -22,49 +22,49 @@
  */
 
 :root {
-  /* --- palette: chalk --------------------------------------------------- */
+  /* --- palette: cream --------------------------------------------------- */
 
   /* Descended from the founder's pastel card, with two deliberate moves away
    * from Anthropic's identity (warm cream ground + terracotta accent):
-   * the paper is COOL (chalk is b* 0.0; the warm cream it replaced was +4.8
-   * against their +4.1 — indistinguishable), and the warm accent is ROSE,
-   * not coral. Butterscotch, duck egg and smoke came through unchanged. */
+   * the paper is COOL (cream is b* 0.0; the warm cream it replaced was +4.8
+   * against their +4.1 — indistinguishable), and the warm accent is RUST,
+   * not coral. Orange, duck egg and smoke came through unchanged. */
 
-  /* Butterscotch. The one hot colour, and a fill rather than an ink: it
-   * holds dark text but must never set text itself — 1.86:1 on chalk. It is
+  /* Orange. The one hot colour, and a fill rather than an ink: it
+   * holds dark text but must never set text itself — 1.86:1 on cream. It is
    * the fill inside every glyph outline and the accent of both dark
    * schemes. */
-  --fh-butterscotch: #EE8B33;
+  --fh-orange: #EE8B33;
 
-  /* Text placed ON a butterscotch fill: 7.1:1. This token is what makes
-   * "butterscotch is a fill, not an ink" mechanical rather than a thing to
-   * remember. It stays a fill on every ground — 2.14:1 on chalk.
+  /* Text placed ON a orange fill: 7.1:1. This token is what makes
+   * "orange is a fill, not an ink" mechanical rather than a thing to
+   * remember. It stays a fill on every ground — 2.14:1 on cream.
    *
-   * The butterscotch FILL is the standing exception to "one accent per
-   * scheme": buttons, pills and live tags stay butterscotch in every scheme,
-   * including Cel and Notepad, whose accent ink is rose. One accent means
+   * The orange FILL is the standing exception to "one accent per
+   * scheme": buttons, pills and live tags stay orange in every scheme,
+   * including Cel and Notepad, whose accent ink is rust. One accent means
    * one accent INK — the fill is a brand constant, one of the three
    * through-lines (outline, fill, mono) that keep four schemes one brand. */
-  --fh-on-butterscotch: #05192B;
+  --fh-on-orange: #05192B;
 
-  /* Rose is NO LONGER a fill-only colour. Harbour moved it from a pale pink
+  /* Rust is NO LONGER a fill-only colour. Harbour moved it from a pale pink
    * to a burnt rust, which made it the accent INK on the light schemes
-   * (9.16:1 on chalk) — see Cel and Notepad below. It is still usable as a
+   * (9.16:1 on cream) — see Cel and Notepad below. It is still usable as a
    * fill, so it keeps a guard, but the guard had to flip with the value:
    * near-black on rust is 1.65:1, cream on rust is 9.16:1. */
-  --fh-rose: #6A2A12;
-  --fh-on-rose: #FAEBD3;
+  --fh-rust: #6A2A12;
+  --fh-on-rust: #FAEBD3;
 
   --fh-sumi: #05192B;        /* cool near-black; every outline is drawn in it */
-  --fh-chalk: #FAEBD3;       /* cool paper white — the light ground */
+  --fh-cream: #FAEBD3;       /* cool paper white — the light ground */
   --fh-white: #ffffff;
   --fh-warmwhite: #FFF9EF;   /* raised surface on the cream ground —
                                 lighter than the paper, not whiter than it */
   --fh-mist: #DEEAEE;        /* raised cool surface */
   --fh-duckegg: #9ABCC6;     /* pale green; second series on dark */
   --fh-smoke: #829AA1;       /* recessive detail and rules; never body text */
-  --fh-emerald: #31606D;     /* accent ink on light; panel ground on dark */
-  --fh-plum: #FFB881;        /* derived: rose fired dark; series on light */
+  --fh-teal: #31606D;     /* accent ink on light; panel ground on dark */
+  --fh-apricot: #FFB881;        /* derived: rust fired dark; series on light */
   --fh-night: #05192B;       /* derived: deep water; primary dark ground */
   --fh-slate: #132538;       /* raised surface on night */
   --fh-print: #082C35;       /* derived: smoked slate; dark tools ground */
@@ -104,35 +104,35 @@
  * build.py fails loudly if any sanctioned pairing slips. */
 
 /* Twilight — primary dark. The lab and the models. Deep water: night ground,
- * slate tiles, and the colour arriving through PANELS — emerald and rose
- * grounds, butterscotch fills, rose and duck-egg series — rather than
+ * slate tiles, and the colour arriving through PANELS — teal and rust
+ * grounds, orange fills, rust and duck-egg series — rather than
  * through the base ground. Dark pages are not monotone; they are dark paper
  * that pastel things sit on. */
 [data-scheme="twilight"] {
   --fh-bg: var(--fh-night);
   --fh-surface: var(--fh-slate);
-  --fh-text: var(--fh-chalk);
+  --fh-text: var(--fh-cream);
   --fh-text-muted: #9CB5BC;
   --fh-rule: #25364A;
-  --fh-accent: var(--fh-butterscotch);
+  --fh-accent: var(--fh-orange);
   --fh-accent-on: var(--fh-sumi);
   --fh-series-1: var(--fh-duckegg);
-  --fh-series-2: var(--fh-plum);
+  --fh-series-2: var(--fh-apricot);
   --fh-typeset: warm;
 }
 
-/* Cel — primary light. Cool paper, sumi ink, white surfaces, one emerald
+/* Cel — primary light. Cool paper, sumi ink, white surfaces, one teal
  * accent. */
 [data-scheme="cel"] {
-  --fh-bg: var(--fh-chalk);
+  --fh-bg: var(--fh-cream);
   --fh-surface: var(--fh-warmwhite);
   --fh-text: var(--fh-sumi);
   --fh-text-muted: #436974;
   --fh-rule: #E5D5BB;
-  --fh-accent: var(--fh-rose);
-  --fh-accent-on: var(--fh-chalk);
-  --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-rose);
+  --fh-accent: var(--fh-rust);
+  --fh-accent-on: var(--fh-cream);
+  --fh-series-1: var(--fh-teal);
+  --fh-series-2: var(--fh-rust);
   --fh-typeset: warm;
 }
 
@@ -143,14 +143,14 @@
   --fh-text: var(--fh-white);
   --fh-text-muted: #9CB5BC;
   --fh-rule: #395760;
-  --fh-accent: var(--fh-butterscotch);
+  --fh-accent: var(--fh-orange);
   --fh-accent-on: var(--fh-sumi);
-  --fh-series-1: var(--fh-plum);
+  --fh-series-1: var(--fh-apricot);
   --fh-series-2: var(--fh-duckegg);
   --fh-typeset: technical;
 }
 
-/* Notepad — secondary light. White page, mist tiles, emerald accent.
+/* Notepad — secondary light. White page, mist tiles, teal accent.
  * For anything read at length. */
 [data-scheme="notepad"] {
   --fh-bg: var(--fh-white);
@@ -158,32 +158,32 @@
   --fh-text: var(--fh-sumi);
   --fh-text-muted: #436974;
   --fh-rule: #CADADF;
-  --fh-accent: var(--fh-rose);
-  --fh-accent-on: var(--fh-chalk);
-  --fh-series-1: var(--fh-emerald);
-  --fh-series-2: var(--fh-rose);
+  --fh-accent: var(--fh-rust);
+  --fh-accent-on: var(--fh-cream);
+  --fh-series-1: var(--fh-teal);
+  --fh-series-2: var(--fh-rust);
   --fh-typeset: technical;
 }
 
 /* Default, when nothing declares a scheme: the lab pair, following the OS. */
 :root { --fh-bg: #05192B; --fh-surface: #132538; --fh-text: #FAEBD3;
         --fh-text-muted: #9CB5BC; --fh-rule: #25364A;
-        --fh-accent: var(--fh-butterscotch); --fh-accent-on: var(--fh-sumi);
-        --fh-series-1: var(--fh-duckegg); --fh-series-2: var(--fh-plum);
+        --fh-accent: var(--fh-orange); --fh-accent-on: var(--fh-sumi);
+        --fh-series-1: var(--fh-duckegg); --fh-series-2: var(--fh-apricot);
         /* The technical band's ground, exposed so page furniture that
          * straddles the boundary — seams, dividers — can reference it
          * instead of hard-coding a colour. Follows the same switch. */
         --fh-band-bg: var(--fh-print); --fh-band-surface: var(--fh-drafting);
-        --fh-band-ink: var(--fh-butterscotch); }
+        --fh-band-ink: var(--fh-orange); }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-scheme]) {
-    --fh-bg: var(--fh-chalk); --fh-surface: var(--fh-warmwhite);
+    --fh-bg: var(--fh-cream); --fh-surface: var(--fh-warmwhite);
     --fh-text: var(--fh-sumi); --fh-text-muted: #436974; --fh-rule: #E5D5BB;
-    --fh-accent: var(--fh-rose); --fh-accent-on: var(--fh-chalk);
-    --fh-series-1: var(--fh-emerald); --fh-series-2: var(--fh-rose);
+    --fh-accent: var(--fh-rust); --fh-accent-on: var(--fh-cream);
+    --fh-series-1: var(--fh-teal); --fh-series-2: var(--fh-rust);
     --fh-band-bg: var(--fh-white); --fh-band-surface: var(--fh-mist);
-    --fh-band-ink: var(--fh-emerald);
+    --fh-band-ink: var(--fh-teal);
   }
 }
 
@@ -197,9 +197,9 @@
   --fh-text: var(--fh-white);
   --fh-text-muted: #9CB5BC;
   --fh-rule: #395760;
-  --fh-accent: var(--fh-butterscotch);
+  --fh-accent: var(--fh-orange);
   --fh-accent-on: var(--fh-sumi);
-  --fh-series-1: var(--fh-plum);
+  --fh-series-1: var(--fh-apricot);
   --fh-series-2: var(--fh-duckegg);
   --fh-typeset: technical;
 }
@@ -211,10 +211,10 @@
     --fh-text: var(--fh-sumi);
     --fh-text-muted: #436974;
     --fh-rule: #CADADF;
-    --fh-accent: var(--fh-rose);
-    --fh-accent-on: var(--fh-chalk);
-    --fh-series-1: var(--fh-emerald);
-    --fh-series-2: var(--fh-rose);
+    --fh-accent: var(--fh-rust);
+    --fh-accent-on: var(--fh-cream);
+    --fh-series-1: var(--fh-teal);
+    --fh-series-2: var(--fh-rust);
   }
 }
 
