@@ -244,8 +244,8 @@ code {
   border: 1px solid transparent;
 }
 .btn-primary {
-  background: var(--fh-butterscotch);
-  color: var(--fh-on-butterscotch);
+  background: var(--fh-orange);
+  color: var(--fh-on-orange);
 }
 .btn-primary:hover { filter: brightness(1.07); }
 .btn-ghost {
@@ -316,7 +316,7 @@ code {
   border: 1px solid var(--fh-rule);
   color: var(--fh-text-muted);
 }
-.tag[data-state="live"] { background: var(--fh-butterscotch); color: var(--fh-on-butterscotch); border-color: transparent; }
+.tag[data-state="live"] { background: var(--fh-orange); color: var(--fh-on-orange); border-color: transparent; }
 
 /* --- footer -------------------------------------------------------------- */
 
@@ -394,7 +394,7 @@ table { width: 100%; border-collapse: collapse; }
 /* Entering the band, the tools' paper ground rises into the lab's sky, inked
    so the line never sits on its own colour.
    COUPLING: the seam sits OUTSIDE the band it transitions into, so it cannot
-   inherit the band's scheme. It used to hard-code --fh-white and --fh-emerald
+   inherit the band's scheme. It used to hard-code --fh-white and --fh-emerald (now --fh-teal)
    as literals that had to be retuned by hand whenever the band's scheme was
    repainted upstream — and the harbour repaint duly moved the technical
    accent to rust while these stayed teal. --fh-band-* are the upstream tokens
