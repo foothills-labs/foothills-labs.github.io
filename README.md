@@ -6,16 +6,18 @@ at <https://foothills-labs.github.io/>.
 ## Brand
 
 The visual system is defined in
-[`foundation_lab`](https://github.com/foothills-labs/foundation_lab), not here:
+[`foothills-brand`](https://github.com/foothills-labs/foothills-brand), not
+here. The *rules* — naming, voice, usage, the decision log — stay in the
+lab's private notebook; the buildable half is public:
 
 | | |
 | --- | --- |
-| Rules | [`docs/brand.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand.md) |
-| Reasoning | [`docs/brand-rationale.md`](https://github.com/foothills-labs/foundation_lab/blob/main/docs/brand-rationale.md) |
-| Logo files | [`assets/logo/`](https://github.com/foothills-labs/foundation_lab/tree/main/assets/logo) |
+| Values and drawings | [`foothills-brand`](https://github.com/foothills-labs/foothills-brand) |
+| Logo files | [`logo/`](https://github.com/foothills-labs/foothills-brand/tree/main/logo) |
+| Rules | `docs/brand.md` in the private notebook |
 
 **`assets/tokens.css`, `assets/tokens.json`, the favicon, the marks and the
-plane glyphs are copies, not sources.** They come from `foundation_lab`.
+plane glyphs are copies, not sources.** They come from `foothills-brand`.
 `tools/vendor.py` holds the manifest and does the copying:
 
 ```sh
@@ -23,7 +25,7 @@ python3 tools/vendor.py --check    # fail if any copy has drifted
 python3 tools/vendor.py --sync     # refresh the copies from upstream
 ```
 
-Both take `--upstream PATH`, defaulting to `../foundation_lab`. To change a
+Both take `--upstream PATH`, defaulting to `../foothills-brand`. To change a
 colour, a typeface or the mark, change it **there**, regenerate, then `--sync`
 here. The JSON carries the generated contrast matrix and fill guards, so the
 "generated rather than asserted" claim in the CSS header holds next to the copy
@@ -38,9 +40,10 @@ shipping the previous palette, because "vendor the new tokens" was a step
 someone had to remember. `.github/workflows/vendor-parity.yml` now runs
 `--check` on every push and pull request, so drift fails CI instead of shipping.
 
-That guard needs a `FOUNDATION_LAB_TOKEN` secret, because `foundation_lab` is
-private and this repo is public — without it the job **skips**, and the guard is
-inert. The workflow says so in its run summary.
+The guard's first version read the private notebook and needed a token
+secret that was never set, so it skipped every real step and reported
+success — inert from the day it landed. `foothills-brand` is public, so the
+job now needs no secret and has no skip path.
 
 **One direction only.** `--sync` copies upstream → here and never the reverse.
 An edit to a vendored file in this repo is the thing that broke last time;
@@ -128,7 +131,7 @@ phase step from line to line, so the set nests and no two lines can ever cross.
 Tidiness is enforced by construction rather than by taste.
 
 The bands are **generated, not hand-drawn**, following the same rule as the
-marks in `foundation_lab`: change `assets/brand/waves.py` and re-run it, never
+marks in `foothills-brand`: change `assets/brand/waves.py` and re-run it, never
 the path data.
 
 ```sh
@@ -167,7 +170,7 @@ silted up below 40 px; it does not, and the site shipped two logos as a
 result, one in the header and favicon and another in the hero.
 
 This is now the rule **upstream** too, rather than a local correction the site
-kept re-applying to vendored files. `foundation_lab` retired its reduced cut on
+kept re-applying to vendored files. The brand repo retired its reduced cut on
 2026-08-15 and its generator emits the full drawing at every size; print was
 measured before adopting, and the small cut's minimum moved 4.6 mm → 5.2 mm on
 typical coated offset. So these files now arrive correct from `--sync` and no
@@ -185,7 +188,7 @@ reference.
 ### Model glyphs
 
 `assets/brand/marks/` holds the four paper-plane glyphs, generated in
-`foundation_lab` and vendored here. They are applied as CSS masks so they take
+`foothills-brand` and vendored here. They are applied as CSS masks so they take
 the scheme's accent colour:
 
 ```html

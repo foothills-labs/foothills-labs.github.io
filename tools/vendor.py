@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Check — or refresh — the brand files this repo copies from foundation_lab.
+"""Check — or refresh — the brand files this repo copies from foothills-brand.
 
 `assets/tokens.css`, `assets/tokens.json`, the marks and the glyphs are COPIES.
-They are generated in `foundation_lab` and vendored here so the site can be
+They are generated in `foothills-brand` -- the public brand repo, split out of
+the private notebook on 2026-08-20 -- and vendored here so the site can be
 plain static files with no build step. Nothing enforced that, so they drifted:
 
   - the site hand-edited `favicon.svg` and the small marks to restore the back
@@ -12,17 +13,17 @@ plain static files with no build step. Nothing enforced that, so they drifted:
     one, because "vendor the new tokens" is a step a human has to remember.
 
 This script is that step, made mechanical. It is the site's half of the
-contract; `assets/tokens/build.py` upstream audits its own tokens.css against
-its palette, which is the other half.
+contract; `tokens/build.py` upstream audits its own tokens.css against its
+palette, which is the other half.
 
     python3 tools/vendor.py --check    # fail if any copy differs (CI)
     python3 tools/vendor.py --sync     # overwrite the copies from upstream
-    python3 tools/vendor.py --check --upstream ../foundation_lab
+    python3 tools/vendor.py --check --upstream ../foothills-brand
 
 Exit status is 1 on drift, so CI can gate on it.
 
 NOTE ON DIRECTION: this only ever copies upstream -> here. If a copy needs to
-change, change it in foundation_lab and re-run with --sync. Editing a vendored
+change, change it in foothills-brand and re-run with --sync. Editing a vendored
 file in this repo is the thing that broke last time; --check will catch it and
 tell you to go upstream.
 """
@@ -35,27 +36,27 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
-DEFAULT_UPSTREAM = os.path.join(os.path.dirname(SITE), "foundation_lab")
+DEFAULT_UPSTREAM = os.path.join(os.path.dirname(SITE), "foothills-brand")
 
 PLANES = [f"plane-{model}{cut}.svg"
           for model in ("canard", "delta", "glider", "hammer")
           for cut in ("", "-dark", "-mono", "-small")]
 
-# (path in foundation_lab, path here)
+# (path in foothills-brand, path here)
 VENDORED = [
-    ("assets/tokens/tokens.css", "assets/tokens.css"),
-    ("assets/tokens/tokens.json", "assets/tokens.json"),
-    ("assets/logo/favicon.svg", "assets/favicon.svg"),
-    ("assets/logo/mark.svg", "assets/brand/mark.svg"),
-    ("assets/logo/mark-colour.svg", "assets/brand/mark-colour.svg"),
-    ("assets/logo/mark-colour-dark.svg", "assets/brand/mark-colour-dark.svg"),
-    ("assets/logo/mark-colour-small.svg", "assets/brand/mark-colour-small.svg"),
-    ("assets/logo/mark-colour-small-dark.svg",
+    ("tokens/tokens.css", "assets/tokens.css"),
+    ("tokens/tokens.json", "assets/tokens.json"),
+    ("logo/favicon.svg", "assets/favicon.svg"),
+    ("logo/mark.svg", "assets/brand/mark.svg"),
+    ("logo/mark-colour.svg", "assets/brand/mark-colour.svg"),
+    ("logo/mark-colour-dark.svg", "assets/brand/mark-colour-dark.svg"),
+    ("logo/mark-colour-small.svg", "assets/brand/mark-colour-small.svg"),
+    ("logo/mark-colour-small-dark.svg",
      "assets/brand/mark-colour-small-dark.svg"),
-    ("assets/logo/png/social-card-1200x630.png", "assets/brand/og.png"),
-    ("assets/logo/png/apple-touch-icon-180.png",
+    ("logo/png/social-card-1200x630.png", "assets/brand/og.png"),
+    ("logo/png/apple-touch-icon-180.png",
      "assets/brand/apple-touch-icon-180.png"),
-] + [(f"assets/marks/{f}", f"assets/brand/marks/{f}") for f in PLANES]
+] + [(f"marks/{f}", f"assets/brand/marks/{f}") for f in PLANES]
 
 
 def compare(upstream):
@@ -75,7 +76,7 @@ def compare(upstream):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--upstream", default=DEFAULT_UPSTREAM,
-                    help="path to a foundation_lab checkout")
+                    help="path to a foothills-brand checkout")
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--check", action="store_true")
     g.add_argument("--sync", action="store_true")
@@ -83,7 +84,7 @@ def main():
 
     upstream = os.path.abspath(args.upstream)
     if not os.path.isdir(upstream):
-        print(f"no foundation_lab checkout at {upstream}", file=sys.stderr)
+        print(f"no foothills-brand checkout at {upstream}", file=sys.stderr)
         return 2
 
     missing_up, missing_here, differ = compare(upstream)
@@ -108,7 +109,7 @@ def main():
     problems = False
     if missing_up:
         problems = True
-        print("Missing in foundation_lab — the manifest is out of date:")
+        print("Missing in foothills-brand — the manifest is out of date:")
         for p in missing_up:
             print(f"  {p}")
     if missing_here:
@@ -118,11 +119,11 @@ def main():
             print(f"  {p}")
     if differ:
         problems = True
-        print("Vendored copies differ from foundation_lab:")
+        print("Vendored copies differ from foothills-brand:")
         for src, dst in differ:
-            print(f"  {dst}  !=  foundation_lab/{src}")
+            print(f"  {dst}  !=  foothills-brand/{src}")
         print("\nThese files are copies, not sources. If the change belongs,")
-        print("make it in foundation_lab and run: python3 tools/vendor.py --sync")
+        print("make it in foothills-brand and run: python3 tools/vendor.py --sync")
     if problems:
         return 1
     print(f"all {len(VENDORED)} vendored files match {upstream}")

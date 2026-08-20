@@ -1,20 +1,18 @@
 name: vendor parity
 
-# The brand files in this repo are COPIES of files generated in foundation_lab
-# (see tools/vendor.py for the manifest). Nothing checked that they matched, and
-# they drifted twice: the site hand-edited the favicon and small marks without
-# sending the change upstream, and a palette repaint landed upstream while the
-# site kept shipping the previous one. This job is the check that was missing.
+# The brand files in this repo are COPIES of files generated in
+# foothills-brand (see tools/vendor.py for the manifest). Nothing checked
+# that they matched, and they drifted twice: the site hand-edited the favicon
+# and small marks without sending the change upstream, and a palette repaint
+# landed upstream while the site kept shipping the previous one.
 #
-# foundation_lab is PRIVATE and this repo is PUBLIC, so the default GITHUB_TOKEN
-# cannot read it. The job needs a token with read access to foundation_lab,
-# stored as the FOUNDATION_LAB_TOKEN secret (a fine-grained PAT with Contents:
-# read, or a GitHub App installation token).
-#
-# Without that secret the job SKIPS rather than fails — forks and pull requests
-# from outside the org never receive secrets, and failing them for that would be
-# noise rather than signal. It means the guard is inert until the secret is set:
-# check the summary of the first run to confirm it is actually running.
+# The first version of this job read the private foundation_lab and needed a
+# FOUNDATION_LAB_TOKEN secret. The secret was never set, so the job skipped
+# every real step and reported success -- a guard that was inert from the day
+# it landed, discovered only when someone read the step list of a "passing"
+# run. The brand was split into the public foothills-brand on 2026-08-20 so
+# that this job needs no secret, has no skip path, and cannot silently
+# degrade into green again.
 
 on:
   push:
@@ -31,41 +29,21 @@ jobs:
         with:
           path: site
 
-      - name: Is the upstream token available?
-        id: token
-        env:
-          UPSTREAM_TOKEN: ${{ secrets.FOUNDATION_LAB_TOKEN }}
-        run: |
-          if [ -n "$UPSTREAM_TOKEN" ]; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "### Vendor parity skipped" >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "No \`FOUNDATION_LAB_TOKEN\` secret, so the private upstream could not be read." >> "$GITHUB_STEP_SUMMARY"
-            echo "Expected on forks and outside pull requests. If you see this on a push to" >> "$GITHUB_STEP_SUMMARY"
-            echo "\`main\` in the canonical repo, the guard is not actually running — add the secret." >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-      - name: Check out foundation_lab
-        if: steps.token.outputs.available == 'true'
+      - name: Check out foothills-brand
         uses: actions/checkout@v4
         with:
-          repository: foothills-labs/foundation_lab
-          token: ${{ secrets.FOUNDATION_LAB_TOKEN }}
-          path: foundation_lab
+          repository: foothills-labs/foothills-brand
+          path: foothills-brand
 
       - name: Compare the vendored copies
-        if: steps.token.outputs.available == 'true'
+        id: check
+        continue-on-error: true
         run: |
           cd site
-          python3 tools/vendor.py --check --upstream ../foundation_lab \
+          python3 tools/vendor.py --check --upstream ../foothills-brand \
             | tee "$GITHUB_WORKSPACE/parity.txt"
-        continue-on-error: true
-        id: check
 
       - name: Report
-        if: steps.token.outputs.available == 'true'
         run: |
           {
             echo "### Vendor parity"
@@ -75,8 +53,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ steps.check.outcome }}" != "success" ]; then
-            echo ""
-            echo "These files are copies, not sources. Change them in foundation_lab," >> "$GITHUB_STEP_SUMMARY"
+            echo "These files are copies, not sources. Change them in foothills-brand," >> "$GITHUB_STEP_SUMMARY"
             echo "then run \`python3 tools/vendor.py --sync\` here." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
