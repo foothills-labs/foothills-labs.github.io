@@ -53,7 +53,7 @@ except ImportError:
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESEARCH = os.path.join(ROOT, "research")
 ARTICLES = os.path.join(RESEARCH, "articles")
-SITE = "https://foothills-labs.com"
+SITE = "https://plicara.com"
 
 REQUIRED = ("title", "date", "summary")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -106,7 +106,7 @@ def chrome_head(title, description, canonical):
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{html.escape(title)} &middot; Foothills Labs</title>
+    <title>{html.escape(title)} &middot; Plicara Labs</title>
     <meta name="description" content="{html.escape(description)}" />
     <link rel="canonical" href="{canonical}" />
     <meta name="theme-color" content="#05192B" />
@@ -136,7 +136,7 @@ def chrome_head(title, description, canonical):
       <div class="wrap">
         <a class="brand" href="/">
           <span class="brand-mark" aria-hidden="true"></span>
-          Foothills Labs
+          Plicara Labs
         </a>
         <nav class="site-nav" aria-label="Primary">
           <a href="/#mission">Mission</a>
@@ -144,7 +144,7 @@ def chrome_head(title, description, canonical):
           <a href="/#tools">Tools</a>
           <a href="/research/">Research</a>
           <a href="/#principles">Principles</a>
-          <a href="https://github.com/foothills-labs">GitHub</a>
+          <a href="https://github.com/plicara">GitHub</a>
         </nav>
       </div>
     </header>
@@ -154,10 +154,10 @@ def chrome_head(title, description, canonical):
 CHROME_FOOT = """
     <footer class="site-footer">
       <div class="wrap">
-        <span>&copy; Foothills Labs</span>
+        <span>&copy; Plicara Labs</span>
         <div class="footer-links">
-          <a href="mailto:info@foothills-labs.com">info@foothills-labs.com</a>
-          <a href="https://github.com/foothills-labs">GitHub</a>
+          <a href="mailto:info@plicara.com">info@plicara.com</a>
+          <a href="https://github.com/plicara">GitHub</a>
           <a href="/">Home</a>
         </div>
       </div>
@@ -175,7 +175,7 @@ MD = markdown.Markdown(extensions=["extra"], output_format="html5")
 def render_article(meta, body_md, slug, pdf_ok):
     MD.reset()
     body_html = MD.convert(body_md)
-    authors = meta.get("authors", "Foothills Labs")
+    authors = meta.get("authors", "Plicara Labs")
     pdf_link = (
         f' &middot; <a class="article-pdf-link"'
         f' href="/research/{slug}/{slug}.pdf">Download PDF</a>'
@@ -207,7 +207,7 @@ def render_article(meta, body_md, slug, pdf_ok):
 def render_index(entries, pdf_ok):
     head = chrome_head(
         "Research",
-        "Articles, analyses and whitepapers from Foothills Labs.",
+        "Articles, analyses and whitepapers from Plicara Labs.",
         f"{SITE}/research/",
     )
     if entries:

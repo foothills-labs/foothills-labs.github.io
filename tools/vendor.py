@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Check — or refresh — the brand files this repo copies from foothills-brand.
+"""Check — or refresh — the brand files this repo copies from plicara-brand.
 
 `assets/tokens.css`, `assets/tokens.json`, the marks and the glyphs are COPIES.
-They are generated in `foothills-brand` -- the public brand repo, split out of
+They are generated in `plicara-brand` -- the public brand repo, split out of
 the private notebook on 2026-08-20 -- and vendored here so the site can be
 plain static files with no build step. Nothing enforced that, so they drifted:
 
@@ -18,12 +18,12 @@ palette, which is the other half.
 
     python3 tools/vendor.py --check    # fail if any copy differs (CI)
     python3 tools/vendor.py --sync     # overwrite the copies from upstream
-    python3 tools/vendor.py --check --upstream ../foothills-brand
+    python3 tools/vendor.py --check --upstream ../plicara-brand
 
 Exit status is 1 on drift, so CI can gate on it.
 
 NOTE ON DIRECTION: this only ever copies upstream -> here. If a copy needs to
-change, change it in foothills-brand and re-run with --sync. Editing a vendored
+change, change it in plicara-brand and re-run with --sync. Editing a vendored
 file in this repo is the thing that broke last time; --check will catch it and
 tell you to go upstream.
 """
@@ -36,13 +36,13 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
-DEFAULT_UPSTREAM = os.path.join(os.path.dirname(SITE), "foothills-brand")
+DEFAULT_UPSTREAM = os.path.join(os.path.dirname(SITE), "plicara-brand")
 
 PLANES = [f"plane-{model}{cut}.svg"
           for model in ("canard", "delta", "glider", "hammer")
           for cut in ("", "-dark", "-mono", "-small")]
 
-# (path in foothills-brand, path here)
+# (path in plicara-brand, path here)
 VENDORED = [
     ("tokens/tokens.css", "assets/tokens.css"),
     ("tokens/tokens.json", "assets/tokens.json"),
@@ -76,7 +76,7 @@ def compare(upstream):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--upstream", default=DEFAULT_UPSTREAM,
-                    help="path to a foothills-brand checkout")
+                    help="path to a plicara-brand checkout")
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--check", action="store_true")
     g.add_argument("--sync", action="store_true")
@@ -84,7 +84,7 @@ def main():
 
     upstream = os.path.abspath(args.upstream)
     if not os.path.isdir(upstream):
-        print(f"no foothills-brand checkout at {upstream}", file=sys.stderr)
+        print(f"no plicara-brand checkout at {upstream}", file=sys.stderr)
         return 2
 
     missing_up, missing_here, differ = compare(upstream)
@@ -109,7 +109,7 @@ def main():
     problems = False
     if missing_up:
         problems = True
-        print("Missing in foothills-brand — the manifest is out of date:")
+        print("Missing in plicara-brand — the manifest is out of date:")
         for p in missing_up:
             print(f"  {p}")
     if missing_here:
@@ -119,11 +119,11 @@ def main():
             print(f"  {p}")
     if differ:
         problems = True
-        print("Vendored copies differ from foothills-brand:")
+        print("Vendored copies differ from plicara-brand:")
         for src, dst in differ:
-            print(f"  {dst}  !=  foothills-brand/{src}")
+            print(f"  {dst}  !=  plicara-brand/{src}")
         print("\nThese files are copies, not sources. If the change belongs,")
-        print("make it in foothills-brand and run: python3 tools/vendor.py --sync")
+        print("make it in plicara-brand and run: python3 tools/vendor.py --sync")
     if problems:
         return 1
     print(f"all {len(VENDORED)} vendored files match {upstream}")
