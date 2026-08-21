@@ -53,7 +53,7 @@ except ImportError:
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESEARCH = os.path.join(ROOT, "research")
 ARTICLES = os.path.join(RESEARCH, "articles")
-SITE = "https://plicara.com"
+SITE = "https://plicara.ai"
 
 REQUIRED = ("title", "date", "summary")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
@@ -156,7 +156,7 @@ CHROME_FOOT = """
       <div class="wrap">
         <span>&copy; Plicara Labs</span>
         <div class="footer-links">
-          <a href="mailto:info@plicara.com">info@plicara.com</a>
+          <a href="mailto:info@plicara.ai">info@plicara.ai</a>
           <a href="https://github.com/plicara">GitHub</a>
           <a href="/">Home</a>
         </div>

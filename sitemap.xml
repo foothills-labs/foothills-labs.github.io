@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://plicara.com/</loc>
+    <loc>https://plicara.ai/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://plicara.com/models/</loc>
+    <loc>https://plicara.ai/models/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://plicara.com/tools/</loc>
+    <loc>https://plicara.ai/tools/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://plicara.com/benchmarks/</loc>
+    <loc>https://plicara.ai/benchmarks/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://plicara.com/research/</loc>
+    <loc>https://plicara.ai/research/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
