@@ -12,7 +12,7 @@ title: A short, specific title
 date: 2026-01-01
 summary: One or two sentences for the index page and search results.
 # Optional keys:
-#   authors: Adrian Tame          (defaults to "Foothills Labs")
+#   authors: Adrian Tame          (defaults to "Plicara Labs")
 #   slug: custom-url-name         (defaults to the file name)
 #   draft: true                   (build nothing until it is removed)
 ---

@@ -1,23 +1,23 @@
-# foothills-labs.github.io
+# plicara.github.io
 
-The Foothills Labs website — a hand-written static site, served by GitHub Pages
-at <https://foothills-labs.github.io/>.
+The Plicara Labs website — a hand-written static site, served by GitHub Pages
+at <https://plicara.github.io/>.
 
 ## Brand
 
 The visual system is defined in
-[`foothills-brand`](https://github.com/foothills-labs/foothills-brand), not
+[`plicara-brand`](https://github.com/plicara/plicara-brand), not
 here. The *rules* — naming, voice, usage, the decision log — stay in the
 lab's private notebook; the buildable half is public:
 
 | | |
 | --- | --- |
-| Values and drawings | [`foothills-brand`](https://github.com/foothills-labs/foothills-brand) |
-| Logo files | [`logo/`](https://github.com/foothills-labs/foothills-brand/tree/main/logo) |
+| Values and drawings | [`plicara-brand`](https://github.com/plicara/plicara-brand) |
+| Logo files | [`logo/`](https://github.com/plicara/plicara-brand/tree/main/logo) |
 | Rules | `docs/brand.md` in the private notebook |
 
 **`assets/tokens.css`, `assets/tokens.json`, the favicon, the marks and the
-plane glyphs are copies, not sources.** They come from `foothills-brand`.
+plane glyphs are copies, not sources.** They come from `plicara-brand`.
 `tools/vendor.py` holds the manifest and does the copying:
 
 ```sh
@@ -25,7 +25,7 @@ python3 tools/vendor.py --check    # fail if any copy has drifted
 python3 tools/vendor.py --sync     # refresh the copies from upstream
 ```
 
-Both take `--upstream PATH`, defaulting to `../foothills-brand`. To change a
+Both take `--upstream PATH`, defaulting to `../plicara-brand`. To change a
 colour, a typeface or the mark, change it **there**, regenerate, then `--sync`
 here. The JSON carries the generated contrast matrix and fill guards, so the
 "generated rather than asserted" claim in the CSS header holds next to the copy
@@ -42,7 +42,7 @@ someone had to remember. `.github/workflows/vendor-parity.yml` now runs
 
 The guard's first version read the private notebook and needed a token
 secret that was never set, so it skipped every real step and reported
-success — inert from the day it landed. `foothills-brand` is public, so the
+success — inert from the day it landed. `plicara-brand` is public, so the
 job now needs no secret and has no skip path.
 
 **One direction only.** `--sync` copies upstream → here and never the reverse.
@@ -131,7 +131,7 @@ phase step from line to line, so the set nests and no two lines can ever cross.
 Tidiness is enforced by construction rather than by taste.
 
 The bands are **generated, not hand-drawn**, following the same rule as the
-marks in `foothills-brand`: change `assets/brand/waves.py` and re-run it, never
+marks in `plicara-brand`: change `assets/brand/waves.py` and re-run it, never
 the path data.
 
 ```sh
@@ -152,8 +152,8 @@ They have to be inline SVG rather than `<img>`, because they read
 masked shape: a mask can only take one colour, and the colour build carries
 rose, butterscotch and emerald facets under the line. That costs two builds,
 because the outline is sumi on light grounds and chalk on dark ones and a
-single file cannot be both. `style.css` resolves `--fh-mark` and
-`--fh-mark-small` per scheme, so markup just asks for the token.
+single file cannot be both. `style.css` resolves `--pl-mark` and
+`--pl-mark-small` per scheme, so markup just asks for the token.
 
 | Where | File |
 | --- | --- |
@@ -188,7 +188,7 @@ reference.
 ### Model glyphs
 
 `assets/brand/marks/` holds the four paper-plane glyphs, generated in
-`foothills-brand` and vendored here. They are applied as CSS masks so they take
+`plicara-brand` and vendored here. They are applied as CSS masks so they take
 the scheme's accent colour:
 
 ```html
@@ -230,7 +230,7 @@ Pages:
 - Because the name matches, GitHub enables Pages automatically on the first
   push to the **default branch** (`main`) and serves the **repository root**.
   There is normally no setting to flip.
-- The site is served at the org root, `https://foothills-labs.github.io/` — not
+- The site is served at the org root, `https://plicara.github.io/` — not
   under a `/repo-name/` path the way project sites are.
 
 So the deploy story is: **merge to `main`, wait a minute, reload.** Pushing to
@@ -283,7 +283,7 @@ python3 -m http.server 8000
 
 ## Custom domain
 
-The site is served at **`foothills-labs.com`**, declared by the `CNAME` file at
+The site is served at **`plicara.com`**, declared by the `CNAME` file at
 the repo root. DNS is managed at Cloudflare. `github.io` redirects to it.
 
 ### DNS records
@@ -292,9 +292,9 @@ All records are **DNS only (grey cloud)** — see the warning below.
 
 | Type | Name | Value |
 | --- | --- | --- |
-| `CNAME` | `@` | `foothills-labs.github.io` |
-| `CNAME` | `www` | `foothills-labs.github.io` |
-| `TXT` | `_github-pages-challenge-foothills-labs` | (token from the org's Pages settings) |
+| `CNAME` | `@` | `plicara.github.io` |
+| `CNAME` | `www` | `plicara.github.io` |
+| `TXT` | `_github-pages-challenge-plicara` | (token from the org's Pages settings) |
 
 Cloudflare flattens the apex `CNAME` to A records automatically, so there is no
 need to hard-code GitHub's four Pages IPs — and the record keeps working if
@@ -320,12 +320,12 @@ HTTPS, and the result is an infinite redirect loop.
 
 ### Order of operations
 
-The `CNAME` file makes GitHub redirect `foothills-labs.github.io` to the custom
+The `CNAME` file makes GitHub redirect `plicara.github.io` to the custom
 domain. Commit it **before** DNS resolves and both addresses are dark — the
 redirect target does not answer. So:
 
 1. Add the DNS records at Cloudflare, grey cloud.
-2. Confirm they resolve: `dig +short foothills-labs.com`.
+2. Confirm they resolve: `dig +short plicara.com`.
 3. Merge the `CNAME` file to `main`.
 4. **Settings → Pages** shows the domain with a DNS check. Wait for the
    certificate, then tick **Enforce HTTPS**.

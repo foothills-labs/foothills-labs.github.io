@@ -1,7 +1,7 @@
 name: vendor parity
 
 # The brand files in this repo are COPIES of files generated in
-# foothills-brand (see tools/vendor.py for the manifest). Nothing checked
+# plicara-brand (see tools/vendor.py for the manifest). Nothing checked
 # that they matched, and they drifted twice: the site hand-edited the favicon
 # and small marks without sending the change upstream, and a palette repaint
 # landed upstream while the site kept shipping the previous one.
@@ -10,7 +10,7 @@ name: vendor parity
 # FOUNDATION_LAB_TOKEN secret. The secret was never set, so the job skipped
 # every real step and reported success -- a guard that was inert from the day
 # it landed, discovered only when someone read the step list of a "passing"
-# run. The brand was split into the public foothills-brand on 2026-08-20 so
+# run. The brand was split into the public plicara-brand on 2026-08-20 so
 # that this job needs no secret, has no skip path, and cannot silently
 # degrade into green again.
 
@@ -29,18 +29,18 @@ jobs:
         with:
           path: site
 
-      - name: Check out foothills-brand
+      - name: Check out plicara-brand
         uses: actions/checkout@v4
         with:
-          repository: foothills-labs/foothills-brand
-          path: foothills-brand
+          repository: plicara/plicara-brand
+          path: plicara-brand
 
       - name: Compare the vendored copies
         id: check
         continue-on-error: true
         run: |
           cd site
-          python3 tools/vendor.py --check --upstream ../foothills-brand \
+          python3 tools/vendor.py --check --upstream ../plicara-brand \
             | tee "$GITHUB_WORKSPACE/parity.txt"
 
       - name: Report
@@ -53,7 +53,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ steps.check.outcome }}" != "success" ]; then
-            echo "These files are copies, not sources. Change them in foothills-brand," >> "$GITHUB_STEP_SUMMARY"
+            echo "These files are copies, not sources. Change them in plicara-brand," >> "$GITHUB_STEP_SUMMARY"
             echo "then run \`python3 tools/vendor.py --sync\` here." >> "$GITHUB_STEP_SUMMARY"
             exit 1
           fi
