@@ -283,7 +283,7 @@ python3 -m http.server 8000
 
 ## Custom domain
 
-The site is served at **`plicara.com`**, declared by the `CNAME` file at
+The site is served at **`plicara.ai`**, declared by the `CNAME` file at
 the repo root. DNS is managed at Cloudflare. `github.io` redirects to it.
 
 ### DNS records
@@ -325,7 +325,7 @@ domain. Commit it **before** DNS resolves and both addresses are dark — the
 redirect target does not answer. So:
 
 1. Add the DNS records at Cloudflare, grey cloud.
-2. Confirm they resolve: `dig +short plicara.com`.
+2. Confirm they resolve: `dig +short plicara.ai`.
 3. Merge the `CNAME` file to `main`.
 4. **Settings → Pages** shows the domain with a DNS check. Wait for the
    certificate, then tick **Enforce HTTPS**.
